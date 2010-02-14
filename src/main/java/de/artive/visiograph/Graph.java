@@ -1,9 +1,8 @@
 package de.artive.visiograph;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,7 +12,7 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 public class Graph {
-    
+
     private Map<String, Node> nodes = new HashMap<String, Node>();
     private Map<String, Edge> edges = new HashMap<String, Edge>();
 
@@ -22,6 +21,9 @@ public class Graph {
     }
 
     public void addNode(Node node) {
+        if ( node.getExtID() == null ) {
+            throw new VisioGraphException("no external ID given: " + node.getText());
+        }
         checkUniqueExtId(node);
         nodes.put(node.getExtID(), node);
     }
@@ -39,6 +41,16 @@ public class Graph {
     public Node getNode(String extId) {
         return nodes.get(extId);
     }
+
+    public Collection<Node> getNodes() {
+        return nodes.values();
+    }
+
+    public Collection<Edge> getEdges() {
+        return edges.values();
+    }
+
+
 
     public void addEdge(Edge edge) {
         checkUniqueExtId(edge);

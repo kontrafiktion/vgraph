@@ -8,4 +8,8 @@ package de.artive.visiograph;
  * To change this template use File | Settings | File Templates.
  */
 public class VisioNodeTemplate {
+
+
+    public VisioNodeTemplate() {
+    }
 }

@@ -216,7 +216,7 @@ public class VisioRectangle {
      * @param value -- a String that can be converted to a BigDecimal
      * @return the converted value or {@link #DEFAULT_VALUE} if the String could not be converted
      */
-    private BigDecimal safeBigDecimal(String value) {
+    public static BigDecimal safeBigDecimal(String value) {
         BigDecimal result;
         try {
             result = new BigDecimal(value);
