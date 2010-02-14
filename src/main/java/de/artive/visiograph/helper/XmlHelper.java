@@ -1,6 +1,7 @@
 package de.artive.visiograph.helper;
 
 import de.artive.visiograph.VisioGraphException;
+import nu.xom.Attribute;
 import nu.xom.Element;
 import nu.xom.Nodes;
 import nu.xom.XPathContext;
@@ -12,7 +13,8 @@ import java.math.BigDecimal;
  * | File Templates.
  */
 public class XmlHelper {
-    public static final XPathContext VISIO_XPATH_CONTEXT = new XPathContext("v", "http://schemas.microsoft.com/visio/2003/core");
+    public static final String VISIO_SCHEMA = "http://schemas.microsoft.com/visio/2003/core";
+    public static final XPathContext VISIO_XPATH_CONTEXT = new XPathContext("v", VISIO_SCHEMA);
 
 
 
@@ -39,7 +41,7 @@ public class XmlHelper {
      * @throws VisioGraphException
      */
     public static Element getSingleElement(Element element, String xquery) throws VisioGraphException {
-        Nodes nodes = element.query(xquery);
+        Nodes nodes = element.query(xquery, VISIO_XPATH_CONTEXT);
         if (nodes.size() != 1) {
             throw new VisioGraphException("xquery: \"" + xquery + "\" returned more than one Node");
         }
@@ -69,4 +71,12 @@ public class XmlHelper {
     }
 
 
+    public static void setAttribute(Element xmlNode, String attrName, String attrValue) {
+        Attribute idAttribute = xmlNode.getAttribute(attrName);
+        if ( idAttribute != null ) {
+            idAttribute.setValue(attrValue);
+        } else {
+           xmlNode.addAttribute(new Attribute(attrName, attrValue));
+        }
+    }
 }

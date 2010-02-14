@@ -1,8 +1,8 @@
 package de.artive.visiograph;
 
-import nu.xom.Builder;
-import nu.xom.Document;
-import nu.xom.ParsingException;
+import de.artive.visiograph.helper.XmlHelper;
+import nu.xom.*;
+import nu.xom.Node;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,12 +22,19 @@ public class VisioDocumentTemplate {
 
     public static final String _ROOT = "/v:VisioDocument";
     public static final String _PAGE = _ROOT + "/v:Pages/v:Page[@ID=\"0\"]";
-    public static final String _PAGE_PROPERTIES = _PAGE + "/v:PageSheet/v:PageProps";
+    public static final String _PAGE_SHEET = _PAGE + "/v:PageSheet";
+    public static final String _PAGE_PROPERTIES = _PAGE_SHEET + "/v:PageProps";
     public static final String _PAGE_WIDTH = _PAGE_PROPERTIES + "/v:PageWidth";
     public static final String _PAGE_HEIGHT = _PAGE_PROPERTIES + "/v:PageHeight";
+    public static final String _SHAPES_CONTAINER = _PAGE + "/v:Shapes";
+    public static final String _CONNECTS_CONTAINER = _PAGE + "/v:Connects";
+    public static final String MAX_SHAPE_ID = "v:Shape[not(following-sibling::v:Shape/@ID > @ID) and not(preceding-sibling::v:Shape/@ID > @ID)]/@ID";
 
+
+    int nextShapeId = 0;
 
     private Document document = null;
+    private Element shapesContainer;
 
     public VisioDocumentTemplate() throws VisioGraphException {
         Builder builder = new Builder();
@@ -56,6 +63,38 @@ public class VisioDocumentTemplate {
         }
     }
 
+    public static void main(String[] args) {
+        VisioDocumentTemplate visioDocumentTemplate = new VisioDocumentTemplate();
+        visioDocumentTemplate.addShape(null);
+    }
+
+    public void addShape(Element xmlNode) {
+        if (shapesContainer == null) {
+            Nodes nodes = document.getRootElement().query(_SHAPES_CONTAINER, XmlHelper.VISIO_XPATH_CONTEXT);
+            if (nodes.size() == 0) {
+                Element page = XmlHelper.getSingleElement(document.getRootElement(), _PAGE);
+                Element pageSheet = XmlHelper.getSingleElement(document.getRootElement(), _PAGE_SHEET);
+                int posPageSheet = page.indexOf(pageSheet);
+                shapesContainer = new Element("Shapes", XmlHelper.VISIO_SCHEMA);
+                page.insertChild(shapesContainer, posPageSheet + 1);
+            } else {
+                shapesContainer = (Element) nodes.get(0);
+                Node maxShapeId = shapesContainer.query(MAX_SHAPE_ID, XmlHelper.VISIO_XPATH_CONTEXT).get(0);
+                if (maxShapeId != null) {
+                    nextShapeId = Integer.valueOf(maxShapeId.getValue()) + 1;
+                }
+            }
+        }
+        xmlNode = new Element("Shoop", XmlHelper.VISIO_SCHEMA);
+        String attrName = "ID";
+        String attrValue = String.valueOf(nextShapeId);
+        XmlHelper.setAttribute(xmlNode, attrName, attrValue);
+
+        nextShapeId++;
+        shapesContainer.appendChild(xmlNode);
+        System.out.println(document.toXML());
+    }
+
     public BigDecimal getPageWidth() {
         String value = getValue(document.getRootElement(), _PAGE_WIDTH);
         if (value == null) {
@@ -72,9 +111,4 @@ public class VisioDocumentTemplate {
         return new BigDecimal(value).multiply(INCH);
     }
 
-    public static void main(String[] args) {
-        VisioDocumentTemplate template = new VisioDocumentTemplate();
-        System.out.println(template.getPageWidth().toPlainString());
-        System.out.println(template.getPageHeight().toPlainString());
-    }
 }
