@@ -25,14 +25,25 @@ public class VisioDocument {
   public static final String _PAGE_WIDTH = _PAGE_PROPERTIES + "/v:PageWidth";
   public static final String _PAGE_HEIGHT = _PAGE_PROPERTIES + "/v:PageHeight";
   public static final String _SHAPES_CONTAINER = _PAGE + "/v:Shapes";
-  public static final String _CONNECTS_CONTAINER = _PAGE + "/v:Connects";
+  public static final String CONNECTS_CONTAINER = "Connects";
+  public static final String _CONNECTS_CONTAINER = _PAGE + "/v:" + CONNECTS_CONTAINER;
+  public static final String _C_CONNECT = ".";
+  public static final String _C_CONNECT_FROM_SHEET = _C_CONNECT + "/@FromSheet";
+  public static final String _C_CONNECT_TO_SHEET = _C_CONNECT + "/@ToSheet";
+
   public static final String MAX_SHAPE_ID = "v:Shape[not(following-sibling::v:Shape/@ID > @ID) and not(preceding-sibling::v:Shape/@ID > @ID)]/@ID";
 
+  public static final String CONNECT_TEMPLATE_BEGIN =
+          "       <Connect  xmlns=\"http://schemas.microsoft.com/visio/2003/core\" FromSheet=\"${ConnectorVisioID}\" FromCell=\"BeginX\" FromPart=\"9\" ToSheet=\"${sourceNodeVisioID}\" ToCell=\"PinX\" ToPart=\"3\"/>\n";
+  public static final String CONNECT_TEMPLATE_END =
+          "       <Connect  xmlns=\"http://schemas.microsoft.com/visio/2003/core\" FromSheet=\"${ConnectorVisioID}\" FromCell=\"EndX\" FromPart=\"12\" ToSheet=\"${targetNodeVisioID}\" ToCell=\"PinX\" ToPart=\"3\"/>\n";
 
   int nextShapeId = 1;
 
   private Document document = null;
   private Element shapesContainer;
+  private Element connectEndTemplate;
+  private Element connectBeginTemplate;
 
 
   public VisioDocument() throws IOException {
@@ -46,6 +57,18 @@ public class VisioDocument {
       loadDocument(templateName);
     } else {
       loadDocument(DEFAULT_VISIO_TEMPLATE);
+    }
+
+    Builder builder = new Builder();
+    try {
+      connectBeginTemplate = builder.build(CONNECT_TEMPLATE_BEGIN, "").getRootElement();
+    } catch (ParsingException e) {
+      throw new VisioGraphException("error parsing: " + CONNECT_TEMPLATE_BEGIN);
+    }
+    try {
+      connectEndTemplate = builder.build(CONNECT_TEMPLATE_END, "").getRootElement();
+    } catch (ParsingException e) {
+      throw new VisioGraphException("error parsing: " + CONNECT_TEMPLATE_END);
     }
   }
 
@@ -131,15 +154,9 @@ public class VisioDocument {
 
   }
 
-
-  public static void main(String[] args) throws IOException {
-    VisioDocument visioDocument = new VisioDocument();
-    visioDocument.addShape(null);
-  }
-
-  // TODO: xmlElement or VisioShape?
-
-  public void addShape(Element xmlNode) {
+  public void addShape(VisioShape visioShape) {
+    Element newXmlNode = visioShape.getShapeElement();
+    
     if (shapesContainer == null) {
       Nodes nodes = document.getRootElement().query(_SHAPES_CONTAINER, XmlHelper.VISIO_XPATH_CONTEXT);
       if (nodes.size() == 0) {
@@ -157,13 +174,31 @@ public class VisioDocument {
       }
     }
 
-    String attrName = "ID";
-    String attrValue = String.valueOf(nextShapeId);
-    XmlHelper.setAttribute(xmlNode, attrName, attrValue);
-
+    visioShape.setVisioID(nextShapeId);
     nextShapeId++;
-    shapesContainer.appendChild(xmlNode);
-    // System.out.println(document.toXML());
+    shapesContainer.appendChild(newXmlNode);
+  }
+
+
+  public void addConnect(int connectorVisioID, int sourceNodeVisioID, int targetNodeVisioID) {
+    Element connectBegin = (Element) connectBeginTemplate.copy();
+    Element connectEnd = (Element) connectEndTemplate.copy();
+    XmlHelper.setValue(connectBegin, _C_CONNECT_FROM_SHEET, String.valueOf(connectorVisioID));
+    XmlHelper.setValue(connectBegin, _C_CONNECT_TO_SHEET, String.valueOf(sourceNodeVisioID));
+
+    XmlHelper.setValue(connectEnd, _C_CONNECT_FROM_SHEET, String.valueOf(connectorVisioID));
+    XmlHelper.setValue(connectEnd, _C_CONNECT_TO_SHEET, String.valueOf(targetNodeVisioID));
+
+    Element connectsContainer = (Element) XmlHelper.getSingleNode(document.getRootElement(), _CONNECTS_CONTAINER, true);
+    if ( connectsContainer == null ) {
+      Element page = XmlHelper.getSingleElement(document.getRootElement(), _PAGE);
+      connectsContainer = new Element(CONNECTS_CONTAINER, XmlHelper.VISIO_SCHEMA);
+      page.appendChild(connectsContainer);
+    }
+    // Element connectsContainer = XmlHelper.getSingleElement(document.getRootElement(), _CONNECTS_CONTAINER);
+    connectsContainer.appendChild(connectBegin);
+    connectsContainer.appendChild(connectEnd);
+
   }
 
   public BigDecimal getPageWidth() {

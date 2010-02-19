@@ -1,7 +1,5 @@
 package de.artive.visiograph;
 
-import nu.xom.Element;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -135,7 +133,8 @@ public class Layout {
                              mm2Inch(yEnd));
       System.out.println();
 
-      visioDocument.addShape((Element) visioConnector.getShapeElement().copy());
+      visioDocument.addShape(visioConnector);
+      visioDocument.addConnect(visioConnector.getVisioID(), source.getVisioRectangle().getVisioID(), target.getVisioRectangle().getVisioID());
 
     }
   }
@@ -187,7 +186,7 @@ public class Layout {
         if (x == 0 && rest < columns) {
           columns = rest;
 
-          // recalculated the horizontal space
+          // recalculate the horizontal space
           columnsBD = new BigDecimal(columns);
           xSpace = (widthWithoutBorder.subtract(NODE_WIDTH.multiply(columnsBD))).divide(columnsBD,
                                                                                         MathContext.DECIMAL32);
@@ -210,9 +209,7 @@ public class Layout {
 
         // TODO: Necessary?
         node.setVisioRectangle(visioRectangle);
-        Element shapeElement = visioRectangle.getShapeElement();
-
-        visioDocument.addShape((Element) shapeElement.copy());
+        visioDocument.addShape(visioRectangle);
 
         System.out.print(node.getExtID() + " (" + xPos.toPlainString() + "," + yPos.toPlainString() + ") ");
         rest--;
@@ -249,7 +246,7 @@ public class Layout {
     graph.addNode(nodeE);
 
     graph.addEdge(new Edge("AB", "AB", nodeA, nodeB));
-    graph.addEdge(new Edge("DB", "DB", nodeD, nodeB));
+    // graph.addEdge(new Edge("DB", "DB", nodeD, nodeB));
     graph.addEdge(new Edge("CE", "CE", nodeC, nodeE));
 
     VisioDocument vd = new VisioDocument();

@@ -160,14 +160,14 @@ public class VisioConnector extends VisioShape {
           "    </Geom>\n" +
           "    <Text>ADfurblbarbfl\n" +
           "</Text>\n" +
-          "</Shape>";
+          "</Shape>\n";
 
 
   public final static String LINE_TO_TEMPLATE =
-      "        <LineTo xmlns=\"http://schemas.microsoft.com/visio/2003/core\" IX=\"\">\n" +
-          "            <X></X>\n" +
-          "            <Y></Y>\n" +
-          "        </LineTo>\n";
+          "    <LineTo xmlns=\"http://schemas.microsoft.com/visio/2003/core\" IX=\"\">\n" +
+          "        <X></X>\n" +
+          "        <Y></Y>\n" +
+          "    </LineTo>\n";
 
 
   private int nextLineId = 2;

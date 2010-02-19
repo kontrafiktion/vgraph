@@ -13,7 +13,8 @@ import java.math.BigDecimal;
 public abstract class VisioShape {
   public static final BigDecimal DEFAULT_VALUE = new BigDecimal("1.00000000000000");
 
-  public static final String _VS_SHAPE = "/v:Shape";
+  // TODO: document why "."
+  public static final String _VS_SHAPE = ".";
   public static final String _VS_EXT_ID = _VS_SHAPE + "/v:Prop[v:Label='external_id']/v:Value";
   public static final String VS_VISIO_ID = "@ID";
   public static final String _VS_VISIO_ID = _VS_SHAPE + "/" + VS_VISIO_ID;
@@ -32,7 +33,7 @@ public abstract class VisioShape {
     Builder builder = new Builder();
     try {
       Document document = builder.build(getTemplate(), "");
-      xmlRoot = document.getRootElement();
+      xmlRoot = (Element)document.getRootElement().copy();
     } catch (ParsingException e) {
       throw new VisioGraphException("problem parsing: " + getTemplate(), e);
     } catch (IOException e) {
@@ -54,7 +55,7 @@ public abstract class VisioShape {
   protected abstract String getTemplate();
 
   public int getVisioID() {
-    Attribute visioIDAttr = (Attribute) xmlRoot.query(_VS_VISIO_ID).get(0);
+    Attribute visioIDAttr = (Attribute) xmlRoot.query(_VS_VISIO_ID, XmlHelper.VISIO_XPATH_CONTEXT).get(0);
     Integer visioID;
     try {
       visioID = Integer.valueOf(visioIDAttr.getValue());
@@ -65,8 +66,7 @@ public abstract class VisioShape {
   }
 
   public void setVisioID(int visioID) {
-    Attribute visioIDAttr = (Attribute) xmlRoot.query(_VS_VISIO_ID).get(0);
-    visioIDAttr.setValue(String.valueOf(visioID));
+    setValue(_VS_VISIO_ID, String.valueOf(visioID));
   }
 
   public BigDecimal getPinX() {
@@ -162,4 +162,9 @@ public abstract class VisioShape {
   public Element getShapeElement() {
     return xmlRoot;
   }
+
+  public void setShapeElement(Element xmlRoot) {
+    this.xmlRoot = xmlRoot;
+  }
+
 }
