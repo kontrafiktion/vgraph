@@ -1,6 +1,6 @@
 package de.artive.visiograph;
 
-import de.artive.visiograph.helper.Constants;
+import de.artive.visiograph.helper.VisioHelper;
 import de.artive.visiograph.helper.XmlHelper;
 import nu.xom.Builder;
 import nu.xom.Document;
@@ -9,7 +9,9 @@ import nu.xom.ParsingException;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.MathContext;
+
+import static de.artive.visiograph.helper.VisioHelper.divideByTwo;
+
 
 /**
  * Created by IntelliJ IDEA. User: vivo Date: Feb 18, 2010 Time: 4:41:27 PM To change this template use File | Settings
@@ -17,7 +19,10 @@ import java.math.MathContext;
  */
 public class VisioConnector extends VisioShape {
 
-  public static final String _VS_GEOMETRY = _VS_SHAPE + "/v:Geom";
+  public static final String _VS_GEOM = _VS_SHAPE + "/v:Geom";
+  public static final String _VS_MOVETO_Y = _VS_GEOM + "/v:MoveTo/v:Y";
+
+
   public static final String _VS_LOCPINX = _VS_XFORM + "/v:LocPinX";
   public static final String _VS_LOCPINY = _VS_XFORM + "/v:LocPinY";
   public static final String _VS_XFORM1D = _VS_SHAPE + "/v:XForm1D";
@@ -175,28 +180,30 @@ public class VisioConnector extends VisioShape {
     XmlHelper.setValue(xmlRoot, _VS_XFORM1D_BEGINY, beginY);
     XmlHelper.setValue(xmlRoot, _VS_XFORM1D_ENDY, endY);
 
-    boolean sameY = beginY.compareTo(endY) == 0;
+    boolean sameRow = beginY.compareTo(endY) == 0;
     BigDecimal height;
-    if ( sameY ) {
+    if ( sameRow ) {
       height = HEIGHT_VALUE_SAME_HEIGHT;
       XmlHelper.setValue(xmlRoot, _VS_HEIGHT_FORMULA, HEIGHT_FORMULA_SAME_HEIGHT);
       setPinY(beginY);
+      setValue(_VS_MOVETO_Y, VisioHelper.VISIO_Y_DIST);
     } else {
       height = endY.subtract(beginY);
       XmlHelper.setValue(xmlRoot, _VS_HEIGHT_FORMULA, HEIGHT_FORMULA_DIFFERENT_HEIGHT);
+      setPinY(beginY.add(divideByTwo(height)));
+      setValue(_VS_MOVETO_Y, VisioHelper.ZERO);
     }
     setHeight(height);
     BigDecimal width = endX.subtract(beginX);
     setWidth(width);
 
-    setPinX(beginX.add(width.divide(TWO, MathContext.DECIMAL32)));
+    setPinX(beginX.add(divideByTwo(width)));
 
     setExtId(extId);
 
     setText(text);
 
 
-    
     // super(pinX, pinY, width, height, extId, text);
     
   }
@@ -211,9 +218,9 @@ public class VisioConnector extends VisioShape {
       XmlHelper.setValue(line, "/v:LineTo/v:X", xDelta);
       XmlHelper.setValue(line, "/v:LineTo/v:Y", yDelta);
       System.out
-          .print("  -> (" + xDelta.multiply(Constants.INCH).toPlainString() + ", " +
-              yDelta.multiply(Constants.INCH).toPlainString() + ")");
-      getSingleElement(_VS_GEOMETRY).appendChild(line.copy());
+          .print("  -> (" + xDelta.multiply(VisioHelper.INCH).toPlainString() + ", " +
+              yDelta.multiply(VisioHelper.INCH).toPlainString() + ")");
+      getSingleElement(_VS_GEOM).appendChild(line.copy());
       // System.out.println(xmlRoot.toXML());
     } catch (ParsingException e) {
       throw new VisioGraphException("error parsing: " + LINE_TO_TEMPLATE);

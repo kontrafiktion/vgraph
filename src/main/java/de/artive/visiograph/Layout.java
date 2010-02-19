@@ -1,6 +1,5 @@
 package de.artive.visiograph;
 
-import de.artive.visiograph.helper.Constants;
 import nu.xom.Element;
 
 import java.io.FileWriter;
@@ -13,19 +12,21 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static de.artive.visiograph.helper.VisioHelper.*;
+
 /**
  * Created by IntelliJ IDEA. User: vivo Date: Feb 14, 2010 Time: 6:19:54 PM To change this template use File | Settings
  * | File Templates.
  */
-public class Layout implements Constants {
+public class Layout {
 
   // All sizes in Millimeter
   public static BigDecimal ONE_BORDER = new BigDecimal("20");
-  public static BigDecimal BORDER = ONE_BORDER.multiply(Constants.TWO);
+  public static BigDecimal BORDER = ONE_BORDER.multiply(TWO);
   public static BigDecimal NODE_WIDTH = new BigDecimal("15");
   public static BigDecimal NODE_HEIGHT = new BigDecimal("10");
-  public static BigDecimal NODE_WIDTH_HALF = NODE_WIDTH.divide(Constants.TWO);
-  public static BigDecimal NODE_HEIGHT_HALF = NODE_HEIGHT.divide(Constants.TWO);
+  public static BigDecimal NODE_WIDTH_HALF = divideByTwo(NODE_WIDTH);
+  public static BigDecimal NODE_HEIGHT_HALF = divideByTwo(NODE_HEIGHT);
 
   public static final BigDecimal X_FACTOR = new BigDecimal("4").divide(new BigDecimal("3"), MathContext.DECIMAL128);
   public static final BigDecimal Y_FACTOR = new BigDecimal("3").divide(new BigDecimal("4"), MathContext.DECIMAL128);
@@ -61,10 +62,10 @@ public class Layout implements Constants {
       Node source = edge.getSource();
       Node target = edge.getTarget();
 
-      BigDecimal sourcePinX = source.getVisioRectangle().getPinX().multiply(Constants.INCH);
-      BigDecimal sourcePinY = source.getVisioRectangle().getPinY().multiply(Constants.INCH);
-      BigDecimal targetPinX = target.getVisioRectangle().getPinX().multiply(Constants.INCH);
-      BigDecimal targetPinY = target.getVisioRectangle().getPinY().multiply(Constants.INCH);
+      BigDecimal sourcePinX = inch2MM(source.getVisioRectangle().getPinX());
+      BigDecimal sourcePinY = inch2MM(source.getVisioRectangle().getPinY());
+      BigDecimal targetPinX = inch2MM(target.getVisioRectangle().getPinX());
+      BigDecimal targetPinY = inch2MM(target.getVisioRectangle().getPinY());
 
       BigDecimal xDelta = targetPinX.subtract(sourcePinX);
       // BigDecimal xSign = new BigDecimal(xDelta.signum());
@@ -89,26 +90,26 @@ public class Layout implements Constants {
       BigDecimal endY;
       BigDecimal height;
 
-      if (ySign != 0) {
+      if (ySign != 0) { // different rows
         BigDecimal yDirectionMultiplier = new BigDecimal(ySign);
 
         beginY = sourcePinY.add(NODE_HEIGHT_HALF.multiply(yDirectionMultiplier));
         endY = targetPinY.add(NODE_HEIGHT_HALF.multiply(yDirectionMultiplier.negate()));
 
         height = targetPinY.subtract(sourcePinY);
-      } else {
+      } else { // same row
         beginY = sourcePinY.add(NODE_HEIGHT_HALF);
         endY = beginY;
         height = new BigDecimal("0.25");
       }
-      BigDecimal widthHalf = width.divide(Constants.TWO, MathContext.DECIMAL64);
-      BigDecimal heightHalf = height.divide(Constants.TWO, MathContext.DECIMAL64);
+      BigDecimal widthHalf = divideByTwo(width);
+      BigDecimal heightHalf = divideByTwo(height);
 
       VisioConnector visioConnector =
-          new VisioConnector(beginX.divide(Constants.INCH, MathContext.DECIMAL32),
-                             endX.divide(Constants.INCH, MathContext.DECIMAL32),
-                             beginY.divide(Constants.INCH, MathContext.DECIMAL32),
-                             endY.divide(Constants.INCH, MathContext.DECIMAL32),
+          new VisioConnector(mm2Inch(beginX),
+                             mm2Inch(endX),
+                             mm2Inch(beginY),
+                             mm2Inch(endY),
                              edge.getExtID(),
                              edge.getText());
 
@@ -117,21 +118,21 @@ public class Layout implements Constants {
       // ------------------
       BigDecimal yDelta;
       BigDecimal yEnd;
-      if (ySign != 0) {
+      if (ySign != 0) { // different rows
         yDelta = heightHalf;
-        yEnd = height;
-      } else {
+        yEnd = endY.subtract(beginY);
+      } else { // same rows
         yDelta = ySpaceHalf;
-        yEnd = Constants.VISIO_Y_DIST;
+        yEnd = VISIO_Y_DIST_MM;
       }
 
       System.out.print(edge.getText() + " (" + beginX + ", " + beginY + ")");
-      visioConnector.addLine(Constants.ZERO,
-                             yDelta.divide(Constants.INCH, MathContext.DECIMAL32));
-      visioConnector.addLine(width.divide(Constants.INCH, MathContext.DECIMAL32),
-                             yDelta.divide(Constants.INCH, MathContext.DECIMAL32));
-      visioConnector.addLine(width.divide(Constants.INCH, MathContext.DECIMAL32),
-                             yEnd.divide(Constants.INCH, MathContext.DECIMAL32));
+      visioConnector.addLine(ZERO,
+                             mm2Inch(yDelta));
+      visioConnector.addLine(mm2Inch(width),
+                             mm2Inch(yDelta));
+      visioConnector.addLine(mm2Inch(width),
+                             mm2Inch(yEnd));
       System.out.println();
 
       visioDocument.addShape((Element) visioConnector.getShapeElement().copy());
@@ -161,10 +162,10 @@ public class Layout implements Constants {
       BigDecimal rowsBD = new BigDecimal(rows);
       BigDecimal xSpace = (widthWithoutBorder.subtract(NODE_WIDTH.multiply(columnsBD))).divide(columnsBD,
                                                                                                MathContext.DECIMAL32);
-      xSpaceHalf = xSpace.divide(Constants.TWO);
+      xSpaceHalf = divideByTwo(xSpace);
       BigDecimal ySpace = (heightWithoutBorder.subtract(NODE_HEIGHT.multiply(rowsBD))).divide(rowsBD,
                                                                                               MathContext.DECIMAL32);
-      ySpaceHalf = ySpace.divide(Constants.TWO);
+      ySpaceHalf = divideByTwo(ySpace);
       BigDecimal xPos;
       BigDecimal yPos = null;
 
@@ -190,7 +191,7 @@ public class Layout implements Constants {
           columnsBD = new BigDecimal(columns);
           xSpace = (widthWithoutBorder.subtract(NODE_WIDTH.multiply(columnsBD))).divide(columnsBD,
                                                                                         MathContext.DECIMAL32);
-          xSpaceHalf = xSpace.divide(Constants.TWO);
+          xSpaceHalf = divideByTwo(xSpace);
         }
         xPos = (new BigDecimal(x).multiply(NODE_WIDTH.add(xSpace))).add(xSpaceHalf)
             .add(NODE_WIDTH_HALF)
@@ -201,10 +202,10 @@ public class Layout implements Constants {
 
         // TODO: calculate everything in Inches?
         VisioRectangle visioRectangle = new VisioRectangle(
-            xPos.divide(Constants.INCH, MathContext.DECIMAL32),
-            yPos.divide(Constants.INCH, MathContext.DECIMAL32),
-            NODE_WIDTH.divide(Constants.INCH, MathContext.DECIMAL32),
-            NODE_HEIGHT.divide(Constants.INCH, MathContext.DECIMAL32),
+            mm2Inch(xPos),
+            mm2Inch(yPos),
+            mm2Inch(NODE_WIDTH),
+            mm2Inch(NODE_HEIGHT),
             node.getExtID(), node.getText());
 
         // TODO: Necessary?
@@ -248,8 +249,8 @@ public class Layout implements Constants {
     graph.addNode(nodeE);
 
     graph.addEdge(new Edge("AB", "AB", nodeA, nodeB));
-    // graph.addEdge(new Edge("CD", "CD", nodeC, nodeD));
-    // graph.addEdge(new Edge("CE", "CE", nodeC, nodeE));
+    graph.addEdge(new Edge("DB", "DB", nodeD, nodeB));
+    graph.addEdge(new Edge("CE", "CE", nodeC, nodeE));
 
     VisioDocument vd = new VisioDocument();
     Layout l = new Layout();

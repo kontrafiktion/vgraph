@@ -1,6 +1,5 @@
 package de.artive.visiograph;
 
-import de.artive.visiograph.helper.Constants;
 import de.artive.visiograph.helper.XmlHelper;
 import nu.xom.*;
 
@@ -11,7 +10,7 @@ import java.math.BigDecimal;
  * Created by IntelliJ IDEA. User: vivo Date: Feb 15, 2010 Time: 8:13:26 AM To change this template use File | Settings
  * | File Templates.
  */
-public abstract class VisioShape implements Constants {
+public abstract class VisioShape {
   public static final BigDecimal DEFAULT_VALUE = new BigDecimal("1.00000000000000");
 
   public static final String _VS_SHAPE = "/v:Shape";

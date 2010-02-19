@@ -1,6 +1,6 @@
 package de.artive.visiograph;
 
-import de.artive.visiograph.helper.Constants;
+import de.artive.visiograph.helper.VisioHelper;
 import de.artive.visiograph.helper.XmlHelper;
 import nu.xom.*;
 import nu.xom.Node;
@@ -171,7 +171,7 @@ public class VisioDocument {
     if (value == null) {
       throw new VisioGraphException("could not determine page width: " + _PAGE_WIDTH);
     }
-    return new BigDecimal(value).multiply(Constants.INCH);
+    return new BigDecimal(value).multiply(VisioHelper.INCH);
   }
 
   public BigDecimal getPageHeight() {
@@ -179,7 +179,7 @@ public class VisioDocument {
     if (value == null) {
       throw new VisioGraphException("could not determine page width: " + _PAGE_HEIGHT);
     }
-    return new BigDecimal(value).multiply(Constants.INCH);
+    return new BigDecimal(value).multiply(VisioHelper.INCH);
   }
 
   public Document getDocument() {
