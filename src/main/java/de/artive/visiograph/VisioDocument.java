@@ -61,14 +61,20 @@ public class VisioDocument {
 
     Builder builder = new Builder();
     try {
-      connectBeginTemplate = builder.build(CONNECT_TEMPLATE_BEGIN, "").getRootElement();
+      Document doc = builder.build(CONNECT_TEMPLATE_BEGIN, "");
+      // I don't know why XOM insist on setting a base ... but Visio won't like it
+      doc.setBaseURI("");
+      connectBeginTemplate = doc.getRootElement();
     } catch (ParsingException e) {
-      throw new VisioGraphException("error parsing: " + CONNECT_TEMPLATE_BEGIN);
+      throw new VisioGraphException("error parsing: " + CONNECT_TEMPLATE_BEGIN, e);
     }
     try {
-      connectEndTemplate = builder.build(CONNECT_TEMPLATE_END, "").getRootElement();
+      Document doc = builder.build(CONNECT_TEMPLATE_END, "");
+      // I don't know why XOM insist on setting a base ... but Visio won't like it
+      doc.setBaseURI("");
+      connectEndTemplate = doc.getRootElement();
     } catch (ParsingException e) {
-      throw new VisioGraphException("error parsing: " + CONNECT_TEMPLATE_END);
+      throw new VisioGraphException("error parsing: " + CONNECT_TEMPLATE_END, e);
     }
   }
 

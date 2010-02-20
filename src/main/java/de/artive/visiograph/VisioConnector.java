@@ -38,7 +38,7 @@ public class VisioConnector extends VisioShape {
   public static final String HEIGHT_FORMULA_DIFFERENT_HEIGHT = "GUARD(EndY-BeginY)";
 
   public static final String CONNECTOR_TEMPLATE =
-      "<Shape xmlns=\"http://schemas.microsoft.com/visio/2003/core\" ID=\"${VisioID}\" NameU=\"Dynamic connector\" Type=\"Shape\" Master=\"0\">\n" +
+      "<Shape xmlns=\"http://schemas.microsoft.com/visio/2003/core\" xml:base=\"\" ID=\"${VisioID}\" NameU=\"Dynamic connector\" Type=\"Shape\" Master=\"0\">\n" +
           "    <XForm>\n" +
           "        <PinX F=\"Inh\">${PinX}</PinX>\n" +
           "        <PinY F=\"Inh\">${PinY}</PinY>\n" +

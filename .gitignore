@@ -1,5 +1,7 @@
 /*.classpath
 /*.project
-/target
+target/
 *~
 .settings/org.eclipse.jdt.core.prefs
+/layout-main*.vdx
+/firstVisio*.vdx

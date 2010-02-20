@@ -1,15 +1,16 @@
 package de.artive.visiograph;
 
+import de.artive.visiograph.main.Options;
 import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.ParsingException;
 import nu.xom.Serializer;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static de.artive.visiograph.helper.CreateInstance.createInstance;
@@ -18,7 +19,19 @@ import static de.artive.visiograph.helper.CreateInstance.createInstance;
  * Created by IntelliJ IDEA. User: vivo Date: Feb 11, 2010 Time: 1:12:16 PM To change this template use File | Settings
  * | File Templates.
  */
-public class Dummy {
+public class VisioGraph {
+
+  private static final String VERSION = "0.1";
+
+  private static final int ERR_SOURCE_AND_TARGET_MISSING = 1;
+  private static final int ERR_TARGET_MISSING = 2;
+  private static final int ERR_TOO_MANY_ARGUMENTS = 3;
+  private static final int ERR_PARSING_EXCEPTION = 4;
+
+  // FIXME: merge
+
+  // TODO: TextPosition same row 
+  // TODO: connections to self
 
   // TODO: mapping from some node type to shapes
   // TODO: configuration (file) GraphXPathProvider
@@ -67,12 +80,12 @@ public class Dummy {
   //    Connects
   //      Connect
 
-  public void merge(String source, String target) {
+  public static void merge(String source, String target) {
 
 
   }
 
-  public void merge(Graph source, File target) throws IOException, ParsingException {
+  public static void merge(Graph source, File target) throws IOException, ParsingException {
     if (target.exists()) {
       Builder builder = new Builder();
       Document document = builder.build(target);
@@ -90,7 +103,7 @@ public class Dummy {
     }
   }
 
-  public void merge(String source, String loaderName, String loaderConf, String target, String template, boolean force) throws IOException {
+  public static void merge(String source, String loaderName, String loaderConf, String target, String template, boolean force) throws IOException {
     SourceLoader loader;
     if (loaderName == null) {
       loader = new SimpleXmlSourceLoader();
@@ -109,7 +122,13 @@ public class Dummy {
 
     loader.load(source, graph, loaderConf);
 
-    VisioDocument visioDocument = new VisioDocument(template);
+
+    VisioDocument visioDocument;
+    if ( targetFile.exists() ) {
+      visioDocument = new VisioDocument(target);
+    } else {
+      visioDocument = new VisioDocument(template);
+    }
     Layout layout = new Layout();
     layout.layout(visioDocument, graph);
 
@@ -129,11 +148,79 @@ public class Dummy {
 
   }
 
+  public static void main(String... args) throws IOException, ParsingException {
 
-  public static void main(String[] args) throws IOException, ParsingException {
+    // args = new String[]{"source"};
+    args = new String[]{"src/test/resources/SimpleGraph.xml", "firstVisio.vdx"};
+    // args = new String[]{"-x"};
+    // args = new String[]{"-h"};
 
-    Dummy d = new Dummy();
-    d.merge("src/test/resources/SimpleGraph.xml", null, null, "firstVisio.vdx", null, true);
+
+    int exitCode = 0;
+
+    String source = null;
+    String target = null;
+
+    Options options = new Options();
+    CmdLineParser cmdLineParser = new CmdLineParser(options);
+
+    try {
+      cmdLineParser.parseArgument(args);
+    } catch (CmdLineException e) {
+      System.err.println();
+      System.err.println(e.getMessage());
+      options.setHelp(true);
+      exitCode = ERR_PARSING_EXCEPTION;
+    }
+
+    if (options.isVersion()) {
+      System.out.println("VisioGraph (C) 2010 Victor Volle. Version: " + VERSION);
+      System.exit(0);
+    }
+
+    List<String> nonOptionArguments = options.getArgument();
+    int size = (nonOptionArguments == null ? 0 : nonOptionArguments.size());
+    if (!options.isHelp()) {
+      switch (size) {
+        case 0:
+          System.err.println("\nneither source nor target given");
+          options.setHelp(true);
+          exitCode = ERR_SOURCE_AND_TARGET_MISSING;
+          break;
+        case 1:
+          System.err.println("\nsource or target not given");
+          options.setHelp(true);
+          exitCode = ERR_TARGET_MISSING;
+          // visioGraph.setSource(nonOptionArguments.get(0));
+          break;
+        case 2:
+          source = nonOptionArguments.get(0);
+          target = nonOptionArguments.get(1);
+          break;
+        default:
+          System.err.println("\nmore than 2 arguments: '" + nonOptionArguments + "'");
+          options.setHelp(true);
+          exitCode = ERR_TOO_MANY_ARGUMENTS;
+      }
+    }
+
+    if (options.isHelp() || args.length == 0) {
+      cmdLineParser.setUsageWidth(100);
+
+      PrintStream out = (exitCode == 0 ? System.out : System.err);
+
+      out.println("\nUsage: java -jar visiograph.jar [OPTIONS] <source> <target>");
+      out.println("OPTIONS: ");
+      cmdLineParser.printUsage(out);
+      System.exit(exitCode);
+    }
+
+
+    System.out.println("source: " + source + " target: " + target);
+
+    VisioGraph.merge(source, options.getLoaderName(), options.getLoaderConf(), target, options.getTemplate(), options.isForce());
+
+    // VisioGraph.merge("src/test/resources/SimpleGraph.xml", null, null, "firstVisio.vdx", null, true);
 
     // load source, create sourceModel
 
@@ -153,4 +240,6 @@ public class Dummy {
 
 
   }
+
+
 }

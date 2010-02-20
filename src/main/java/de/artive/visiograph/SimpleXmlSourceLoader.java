@@ -77,6 +77,7 @@ public class SimpleXmlSourceLoader implements SourceLoader {
       }
       Edge edge = new Edge(edgeExtId, edgeText, sourceNode, targetNode);
 
+      graph.addEdge(edge);
     }
   }
 

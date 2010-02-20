@@ -6,11 +6,12 @@
         <system id="3">Node C</system>
         <system id="4">Node D</system>
         <system id="5">Node E</system>
+        <system id="6">Node 6</system>
     </systems>
     <connections>
-        <connect id="c12" source="1" target="1"></connect>
-        <connect id="c11" source="1" target="2"></connect>
-        <connect id="c34" source="3" target="4"></connect>
-        <connect id="c43" source="4" target="3"></connect>
+        <connect id="c12" source="1" target="1">A=>B</connect>
+        <connect id="c11" source="1" target="2">A=>A</connect>
+        <connect id="c34" source="3" target="4">C=>D</connect>
+        <connect id="c43" source="4" target="3">D=>C</connect>
     </connections>
 </graph>
