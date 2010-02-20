@@ -98,7 +98,7 @@ public class Layout {
       } else { // same row
         beginY = sourcePinY.add(NODE_HEIGHT_HALF);
         endY = beginY;
-        height = new BigDecimal("0.25");
+        height = VISIO_MINIMAL_SIZE;
       }
       BigDecimal widthHalf = divideByTwo(width);
       BigDecimal heightHalf = divideByTwo(height);

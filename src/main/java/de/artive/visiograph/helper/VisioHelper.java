@@ -13,6 +13,7 @@ public final class VisioHelper {
   public static final BigDecimal INCH = new BigDecimal("25.4");
   public static final BigDecimal VISIO_Y_DIST = new BigDecimal("0.125");
   public static final BigDecimal VISIO_Y_DIST_MM = VISIO_Y_DIST.multiply(INCH);
+  public static final BigDecimal VISIO_MINIMAL_SIZE = new BigDecimal("0.25");
 
   public static final BigDecimal divideByTwo(BigDecimal number) {
     return number.divide(TWO, MathContext.DECIMAL32);

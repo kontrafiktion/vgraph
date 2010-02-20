@@ -2,10 +2,7 @@ package de.artive.visiograph;
 
 import de.artive.visiograph.helper.VisioHelper;
 import de.artive.visiograph.helper.XmlHelper;
-import nu.xom.Builder;
-import nu.xom.Document;
-import nu.xom.Element;
-import nu.xom.ParsingException;
+import nu.xom.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -24,6 +21,11 @@ public class VisioConnector extends VisioShape {
 
 
   public static final String _VS_LOCPINX = _VS_XFORM + "/v:LocPinX";
+  public static final String _VS_TEXTPOS = _VS_SHAPE + "/v:Control[@NameU='TextPosition']";
+  public static final String _VS_TEXTPOS_X = _VS_TEXTPOS + "/v:X";
+  public static final String _VS_TEXTPOS_Y = _VS_TEXTPOS + "/v:Y";
+  public static final String _VS_TEXTPOS_XDYN = _VS_TEXTPOS + "/v:XDyn";
+  public static final String _VS_TEXTPOS_YDYN = _VS_TEXTPOS + "/v:YDyn";
   public static final String _VS_LOCPINY = _VS_XFORM + "/v:LocPinY";
   public static final String _VS_XFORM1D = _VS_SHAPE + "/v:XForm1D";
   public static final String _VS_XFORM1D_BEGINX = _VS_XFORM1D + "/v:BeginX";
@@ -32,7 +34,6 @@ public class VisioConnector extends VisioShape {
   public static final String _VS_XFORM1D_ENDY = _VS_XFORM1D + "/v:EndY";
   public static final String _VS_HEIGHT_FORMULA = _VS_HEIGHT + "/@F";
 
-  public static final BigDecimal HEIGHT_VALUE_SAME_HEIGHT = new BigDecimal("0.25");
   public static final String HEIGHT_FORMULA_SAME_HEIGHT = "GUARD(0.25DL)";
   public static final String HEIGHT_FORMULA_DIFFERENT_HEIGHT = "GUARD(EndY-BeginY)";
 
@@ -88,18 +89,6 @@ public class VisioConnector extends VisioShape {
           "        <ShapeKeywords F=\"Inh\"/>\n" +
           "        <DropOnPageScale F=\"Inh\">1</DropOnPageScale>\n" +
           "    </Misc>\n" +
-          "    <Prop ID=\"1\">\n" +
-          "       <Value Unit=\"STR\">${ExtId}</Value>\n" +
-          "       <Prompt F=\"No Formula\"/>\n" +
-          "       <Label>external_id</Label>\n" +
-          "       <Format F=\"No Formula\"/>\n" +
-          "       <SortKey F=\"No Formula\"/>\n" +
-          "       <Type>0</Type>\n" +
-          "       <Invisible F=\"No Formula\">0</Invisible>\n" +
-          "       <Verify F=\"No Formula\">0</Verify>\n" +
-          "       <LangID>1031</LangID>\n" +
-          "       <Calendar F=\"No Formula\">0</Calendar>\n" +
-          "    </Prop>\n" +
           "    <TextXForm>\n" +
           "        <TxtPinX F=\"Inh\">0</TxtPinX>\n" +
           "        <TxtPinY F=\"Inh\">-1.8487535</TxtPinY>\n" +
@@ -148,6 +137,41 @@ public class VisioConnector extends VisioShape {
           "        <CanGlue F=\"Inh\">0</CanGlue>\n" +
           "        <Prompt F=\"Inh\">Reposition Text</Prompt>\n" +
           "    </Control>" +
+          "    <Prop ID=\"1\">\n" +
+          "       <Value Unit=\"STR\">${ExtId}</Value>\n" +
+          "       <Prompt F=\"No Formula\"/>\n" +
+          "       <Label>external_id</Label>\n" +
+          "       <Format F=\"No Formula\"/>\n" +
+          "       <SortKey F=\"No Formula\"/>\n" +
+          "       <Type>0</Type>\n" +
+          "       <Invisible F=\"No Formula\">0</Invisible>\n" +
+          "       <Verify F=\"No Formula\">0</Verify>\n" +
+          "       <LangID>1031</LangID>\n" +
+          "       <Calendar F=\"No Formula\">0</Calendar>\n" +
+          "    </Prop>\n" +
+          "    <Char IX=\"0\">\n" +
+          "        <Font F=\"Inh\">4</Font>\n" +
+          "        <Color F=\"Inh\">0</Color>\n" +
+          "        <Style F=\"Inh\">0</Style>\n" +
+          "        <Case F=\"Inh\">0</Case>\n" +
+          "        <Pos F=\"Inh\">0</Pos>\n" +
+          "        <FontScale F=\"Inh\">1</FontScale>\n" +
+          "        <Size F=\"Inh\">0.1111111111111111</Size>\n" +
+          "        <DblUnderline F=\"Inh\">0</DblUnderline>\n" +
+          "        <Overline F=\"Inh\">0</Overline>\n" +
+          "        <Strikethru F=\"Inh\">0</Strikethru>\n" +
+          "        <Highlight F=\"Inh\">0</Highlight>\n" +
+          "        <DoubleStrikethrough F=\"Inh\">0</DoubleStrikethrough>\n" +
+          "        <RTLText F=\"Inh\">0</RTLText>\n" +
+          "        <UseVertical F=\"Inh\">0</UseVertical>\n" +
+          "        <Letterspace F=\"Inh\">0</Letterspace>\n" +
+          "        <ColorTrans F=\"Inh\">0</ColorTrans>\n" +
+          "        <AsianFont F=\"Inh\">0</AsianFont>\n" +
+          "        <ComplexScriptFont F=\"Inh\">0</ComplexScriptFont>\n" +
+          "        <LocalizeFont F=\"Inh\">0</LocalizeFont>\n" +
+          "        <ComplexScriptSize F=\"Inh\">-1</ComplexScriptSize>\n" +
+          "        <LangID F=\"Inh\">1031</LangID>\n" +
+          "    </Char>" +
           "    <Geom IX=\"0\">\n" +
           "        <NoFill>1</NoFill>\n" +
           "        <NoLine>0</NoLine>\n" +
@@ -183,7 +207,7 @@ public class VisioConnector extends VisioShape {
     boolean sameRow = beginY.compareTo(endY) == 0;
     BigDecimal height;
     if ( sameRow ) {
-      height = HEIGHT_VALUE_SAME_HEIGHT;
+      height = VisioHelper.VISIO_MINIMAL_SIZE;
       XmlHelper.setValue(xmlRoot, _VS_HEIGHT_FORMULA, HEIGHT_FORMULA_SAME_HEIGHT);
       setPinY(beginY);
       setValue(_VS_MOVETO_Y, VisioHelper.VISIO_Y_DIST);
@@ -202,6 +226,14 @@ public class VisioConnector extends VisioShape {
     setExtId(extId);
 
     setText(text);
+
+    // TextPos
+    BigDecimal halfWidth = divideByTwo(width);
+    BigDecimal halfHeight = divideByTwo(height);
+    setValue(_VS_TEXTPOS_X, halfWidth);
+    setValue(_VS_TEXTPOS_Y, halfHeight);
+    setValue(_VS_TEXTPOS_XDYN, halfWidth);
+    setValue(_VS_TEXTPOS_YDYN, halfHeight);
 
 
     // super(pinX, pinY, width, height, extId, text);
@@ -229,6 +261,8 @@ public class VisioConnector extends VisioShape {
     }
 
   }
+
+
 
 
   @Override

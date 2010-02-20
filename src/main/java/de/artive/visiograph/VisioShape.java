@@ -26,6 +26,14 @@ public abstract class VisioShape {
   public static final String _VS_HEIGHT = _VS_XFORM + "/v:Height";
   public static final String _VS_TEXT = _VS_SHAPE + "/v:Text";
 
+  public static final Element CHAR_INDEX_ELEMENT;
+
+  static {
+    CHAR_INDEX_ELEMENT = new Element("cp", XmlHelper.VISIO_SCHEMA);
+    CHAR_INDEX_ELEMENT.addAttribute(new Attribute("IX", "0"));
+  }
+
+  
 
   protected Element xmlRoot;
 
@@ -114,7 +122,11 @@ public abstract class VisioShape {
   }
 
   public void setText(String text) {
-    setValue(_VS_TEXT, text);
+    Element textElement = getSingleElement(_VS_TEXT);
+    textElement.removeChildren();
+    // TODO: better formatting
+    // textElement.appendChild(CHAR_INDEX_ELEMENT.copy());
+    textElement.appendChild(text);
   }
 
   protected Element getSingleElement(String text) {

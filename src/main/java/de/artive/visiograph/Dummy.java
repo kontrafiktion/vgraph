@@ -20,15 +20,18 @@ import static de.artive.visiograph.helper.CreateInstance.createInstance;
  */
 public class Dummy {
 
+  // TODO: mapping from some node type to shapes
+  // TODO: configuration (file) GraphXPathProvider
+  // TODO: KNOWN_LOADERS to abbreviate class names
+  // TODO: Shape Templates (i) full Visio Document (ii) shape only
+  // TODO: Text Templates
+
   // usage: visiograph [OPTIONS] <source> <target>
   // -l --loader <loader_name>     the class name of the loader to be used
   // -c --loaderConf <loader_conf> some configuration string for the loader (e.g. a URL)
   // -t --template <template_name> the name of a Visio template file
   // -f --force                    overwrite the target instead of merging
   //
-  // Future: mapping from some node type to shapes
-  // Future: configuration (file) GraphXPathProvider
-  // Future: KNOWN_LOADERS to abbreviate class names 
 
   public static Map<String, SourceLoader> KNOWN_LOADERS = new HashMap<String, SourceLoader>() {{
     // put("simple", new SimpleXmlSourceLoader() 
