@@ -47,6 +47,11 @@ public class XmlHelper {
     return (Element) nodes.get(0);
   }
 
+  public static Element getSingleElement(Element element, String xPath, boolean optional) throws VisioGraphException {
+    return (Element) getSingleNode(element, xPath, optional);
+  }
+
+
   /**
    * Sets the given value as Text in the Element referenced by the given xPath
    *

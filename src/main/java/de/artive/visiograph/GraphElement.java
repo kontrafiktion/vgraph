@@ -48,4 +48,9 @@ public class GraphElement {
   public int hashCode() {
     return extID.hashCode();
   }
+
+  @Override
+  public String toString() {
+    return text + " [" + extID + "]";
+  }
 }

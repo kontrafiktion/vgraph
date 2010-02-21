@@ -1,17 +1,12 @@
 package de.artive.visiograph;
 
 import de.artive.visiograph.main.Options;
-import nu.xom.Builder;
-import nu.xom.Document;
-import nu.xom.ParsingException;
-import nu.xom.Serializer;
+import nu.xom.*;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static de.artive.visiograph.helper.CreateInstance.createInstance;
 
@@ -32,12 +27,18 @@ public class VisioGraph {
 
   // TODO: TextPosition same row 
   // TODO: connections to self
+  // TODO: override text?
+  // TODO: strict and lenient parsing
+  // TODO: ERROR CODES
 
+  // TODO: shape.height() instead of NODE_HEIGHT
   // TODO: mapping from some node type to shapes
   // TODO: configuration (file) GraphXPathProvider
   // TODO: KNOWN_LOADERS to abbreviate class names
   // TODO: Shape Templates (i) full Visio Document (ii) shape only
   // TODO: Text Templates
+
+  // TODO: BegTrigger/EndTrigger?
 
   // usage: visiograph [OPTIONS] <source> <target>
   // -l --loader <loader_name>     the class name of the loader to be used
@@ -118,19 +119,71 @@ public class VisioGraph {
       }
     }
 
-    Graph graph = new Graph();
+    Graph newGraph = new Graph();
 
-    loader.load(source, graph, loaderConf);
+    loader.load(source, newGraph, loaderConf);
 
 
     VisioDocument visioDocument;
-    if ( targetFile.exists() ) {
+    if (targetFile.exists()) {
       visioDocument = new VisioDocument(target);
     } else {
       visioDocument = new VisioDocument(template);
     }
+
+    Graph existingGraph = visioDocument.getGraph();
+
+    // move the visio shapes from the existing graph to the new graph
+    for (Node newNode : newGraph.getNodes()) {
+      Node existingNode = existingGraph.getNode(newNode.getExtID());
+      if (existingNode != null) {
+        newNode.setVisioRectangle(existingNode.getVisioRectangle());
+        existingNode.setVisioRectangle(null);
+      }
+    }
+
+    for (Edge newEdge : newGraph.getEdges()) {
+      Edge existingEdge = existingGraph.getEdge(newEdge.getExtID());
+      if (existingEdge != null) {
+        newEdge.setVisioConnector(existingEdge.getVisioConnector());
+        existingEdge.setVisioConnector(null);
+      }
+    }
+
+    // now all nodes/edges in the new graph, that have no visio counterpart are _new_ elements
+    // and all nodes/edges in the existing graph that still have visio counterparts are obsolete
+
+    for (Node existingNode : existingGraph.getNodes()) {
+      if (existingNode.getVisioRectangle() != null) {
+        System.out.println("OBSOLETE: " + existingNode);
+      } else {
+        System.out.println("exists: " + existingNode);
+      }
+    }
+
+    for (Edge existingEdge : existingGraph.getEdges()) {
+      if (existingEdge.getVisioConnector() != null) {
+        System.out.println("OBSOLETE: " + existingEdge);
+      } else {
+        System.out.println("exists: " + existingEdge);
+      }
+    }
+
+    for (Node newNode : newGraph.getNodes()) {
+      if (newNode.getVisioRectangle() == null) {
+        System.out.println("NEW: " + newNode);
+      }
+    }
+
+    for (Edge newEdge : newGraph.getEdges()) {
+      if (newEdge.getVisioConnector() == null) {
+        System.out.println("NEW: " + newEdge);
+      }
+    }
+
+
     Layout layout = new Layout();
-    layout.layout(visioDocument, graph);
+    layout.layout(visioDocument, newGraph);
 
 
     OutputStream outputStream = System.out;
@@ -151,7 +204,7 @@ public class VisioGraph {
   public static void main(String... args) throws IOException, ParsingException {
 
     // args = new String[]{"source"};
-    args = new String[]{"src/test/resources/SimpleGraph.xml", "firstVisio.vdx"};
+    // args = new String[]{"src/test/resources/SimpleGraph.xml", "firstVisio.vdx"};
     // args = new String[]{"-x"};
     // args = new String[]{"-h"};
 
@@ -218,7 +271,12 @@ public class VisioGraph {
 
     System.out.println("source: " + source + " target: " + target);
 
-    VisioGraph.merge(source, options.getLoaderName(), options.getLoaderConf(), target, options.getTemplate(), options.isForce());
+    VisioGraph.merge(source,
+                     options.getLoaderName(),
+                     options.getLoaderConf(),
+                     target,
+                     options.getTemplate(),
+                     options.isForce());
 
     // VisioGraph.merge("src/test/resources/SimpleGraph.xml", null, null, "firstVisio.vdx", null, true);
 

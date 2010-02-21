@@ -15,7 +15,8 @@ public abstract class VisioShape {
 
   // TODO: document why "."
   public static final String _VS_SHAPE = ".";
-  public static final String _VS_EXT_ID = _VS_SHAPE + "/v:Prop[v:Label='external_id']/v:Value";
+  public static final String PROP_EXTERNAL_ID_VALUE = "/v:Prop[v:Label='external_id']/v:Value";
+  public static final String _VS_EXT_ID = _VS_SHAPE + PROP_EXTERNAL_ID_VALUE;
   public static final String VS_VISIO_ID = "@ID";
   public static final String _VS_VISIO_ID = _VS_SHAPE + "/" + VS_VISIO_ID;
 
@@ -33,7 +34,10 @@ public abstract class VisioShape {
     CHAR_INDEX_ELEMENT.addAttribute(new Attribute("IX", "0"));
   }
 
-  
+
+  protected VisioShape(Element xmlRoot) {
+    this.xmlRoot = xmlRoot;
+  }
 
   protected Element xmlRoot;
 
@@ -41,7 +45,7 @@ public abstract class VisioShape {
     Builder builder = new Builder();
     try {
       Document document = builder.build(getTemplate(), "");
-      xmlRoot = (Element)document.getRootElement().copy();
+      xmlRoot = (Element) document.getRootElement().copy();
     } catch (ParsingException e) {
       throw new VisioGraphException("problem parsing: " + getTemplate(), e);
     } catch (IOException e) {
@@ -179,4 +183,9 @@ public abstract class VisioShape {
     this.xmlRoot = xmlRoot;
   }
 
+
+  @Override
+  public String toString() {
+    return getText() + " [" + getExtId() + "]";
+  }
 }

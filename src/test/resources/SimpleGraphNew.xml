@@ -5,13 +5,13 @@
         <system id="B">Node B</system>
         <system id="C">Node C</system>
         <system id="D">Node D</system>
-        <system id="E">Node E</system>
+        <system id="F">Node F</system>
         <!--system id="6">Node 6</system-->
     </systems>
     <connections>
         <connect id="cAB1" source="A" target="A">A=>B</connect>
         <connect id="cAB2" source="A" target="B">A=>A</connect>
-        <connect id="cCD" source="C" target="D">C=>D</connect>
         <connect id="cDC" source="D" target="C">D=>C</connect>
+        <connect id="cDF" source="D" target="F">D=>F</connect>
     </connections>
 </graph>

@@ -1,8 +1,6 @@
 package de.artive.visiograph;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA. User: vivo Date: Feb 12, 2010 Time: 8:44:13 PM To change this template use File | Settings
@@ -51,6 +49,10 @@ public class Graph {
   public void addEdge(Edge edge) {
     checkUniqueExtId(edge);
     edges.put(edge.getExtID(), edge);
+  }
+
+  public Edge getEdge(String extId) {
+    return edges.get(extId);
   }
 
 

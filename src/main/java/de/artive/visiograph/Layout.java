@@ -2,13 +2,8 @@ package de.artive.visiograph;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.math.*;
+import java.util.*;
 
 import static de.artive.visiograph.helper.VisioHelper.*;
 
@@ -134,7 +129,9 @@ public class Layout {
       System.out.println();
 
       visioDocument.addShape(visioConnector);
-      visioDocument.addConnect(visioConnector.getVisioID(), source.getVisioRectangle().getVisioID(), target.getVisioRectangle().getVisioID());
+      visioDocument.addConnect(visioConnector.getVisioID(),
+                               source.getVisioRectangle().getVisioID(),
+                               target.getVisioRectangle().getVisioID());
 
     }
   }
