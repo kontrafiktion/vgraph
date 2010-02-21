@@ -40,6 +40,7 @@ public class VisioGraph {
   private static final int ERR_PARSING_EXCEPTION = 4;
 
   // TODO: package as shell/batch script
+  // TODO: color NEW/OBSOLETE elements
   // TODO: TextPosition same row
   // TODO: connections to self
   // TODO: override text?
