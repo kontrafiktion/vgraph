@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2010 Victor Volle
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <VisioDocument xmlns="http://schemas.microsoft.com/visio/2003/core" key="972A607863432B4D0E1387C9F7BA6675CE4F5265795906A839F7BF9C74B6C07500FE739741909D0036AA638F999F1879DBFC7D0F598306B73084A866A07D89D4" start="190" metric="1" DocLangID="1031" buildnum="8223" version="11.0" xml:space="preserve">
     <DocumentProperties>
         <Creator>Victor Volle</Creator>

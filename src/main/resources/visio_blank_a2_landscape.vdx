@@ -1,4 +1,20 @@
 <?xml version='1.0' encoding='utf-8' ?>
+<!--
+  ~ Copyright 2010 Victor Volle
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <VisioDocument key='445F2A8C23D10A964B0EA584435E99A8BE379B3CABE7E78D4D755B71768B7878FC3EA8281331D670AF1A4EA8106B63CDEBA444DA9ADD12CAF678F938F717FB64' start='190' xmlns='http://schemas.microsoft.com/visio/2003/core' metric='1' DocLangID='1031' buildnum='8223' version='11.0' xml:space='preserve'><DocumentProperties><Creator>Victor Volle</Creator><Company>Senacor Technologies</Company><BuildNumberCreated>738205727</BuildNumberCreated><BuildNumberEdited>738205727</BuildNumberEdited><PreviewPicture Size='276'>
 AQAAAGwAAAAAAAAAAAAAAP//////////AAAAAAAAAADdrQAAG3sAACBFTUYAAAEAFAEAAAUAAAABA
 AAAAAAAAAAAAAAAAAAAoAUAAIQDAACTAQAA/AAAAAAAAAAAAAAAAAAAADgmBgBg2AMARgAAACwAAA
