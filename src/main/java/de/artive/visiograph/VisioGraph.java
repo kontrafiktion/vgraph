@@ -39,7 +39,6 @@ public class VisioGraph {
   private static final int ERR_TOO_MANY_ARGUMENTS = 3;
   private static final int ERR_PARSING_EXCEPTION = 4;
 
-  // TODO: color NEW/OBSOLETE elements
   // TODO: TextPosition same row
   // TODO: connections to self
   // TODO: override text?
