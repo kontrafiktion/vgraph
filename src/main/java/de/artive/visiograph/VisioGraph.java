@@ -39,6 +39,7 @@ public class VisioGraph {
   private static final int ERR_TOO_MANY_ARGUMENTS = 3;
   private static final int ERR_PARSING_EXCEPTION = 4;
 
+  // TODO: configuration (file) GraphXPathProvider
   // TODO: TextPosition same row
   // TODO: connections to self
   // TODO: override text?
@@ -48,7 +49,6 @@ public class VisioGraph {
   // TODO: Handling of manually rerouted connectors 
   // TODO: shape.height() instead of NODE_HEIGHT
   // TODO: mapping from some node type to shapes
-  // TODO: configuration (file) GraphXPathProvider
   // TODO: KNOWN_LOADERS to abbreviate class names
   // TODO: Shape Templates (i) full Visio Document (ii) shape only
   // TODO: Text Templates
