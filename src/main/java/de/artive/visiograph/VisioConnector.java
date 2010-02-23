@@ -18,9 +18,9 @@ package de.artive.visiograph;
 
 import de.artive.visiograph.helper.VisioHelper;
 import de.artive.visiograph.helper.XmlHelper;
-import nu.xom.*;
+import nu.xom.Document;
+import nu.xom.Element;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 
 import static de.artive.visiograph.helper.VisioHelper.divideByTwo;
@@ -94,7 +94,7 @@ public class VisioConnector extends VisioShape {
       "        <DynFeedback F=\"Inh\">2</DynFeedback>\n" +
       "        <GlueType F=\"Inh\">2</GlueType>\n" +
       "        <WalkPreference F=\"Inh\">0</WalkPreference>\n" +
-      "        <BegTrigger F=\"_XFTRIGGER(Sheet.1!EventXFMod)\">2</BegTrigger>\n" +
+      "        <BegTrigger F=\"_XFTRIGGER(Sheet.2!EventXFMod)\">2</BegTrigger>\n" +
       "        <EndTrigger F=\"_XFTRIGGER(Sheet.4!EventXFMod)\">2</EndTrigger>\n" +
       "        <ObjType F=\"Inh\">2</ObjType>\n" +
       "        <Comment F=\"Inh\"/>\n" +
@@ -262,23 +262,16 @@ public class VisioConnector extends VisioShape {
 
 
   public void addLine(BigDecimal xDelta, BigDecimal yDelta) {
-    try {
-      Document lineToTemplate = new Builder().build(LINE_TO_TEMPLATE, "");
-      Element line = lineToTemplate.getRootElement();
-      XmlHelper.setValue(line, "/v:LineTo/@IX", String.valueOf(nextLineId));
-      nextLineId++;
-      XmlHelper.setValue(line, "/v:LineTo/v:X", xDelta);
-      XmlHelper.setValue(line, "/v:LineTo/v:Y", yDelta);
-      System.out
-          .print("  -> (" + xDelta.multiply(VisioHelper.INCH).toPlainString() + ", " +
-                 yDelta.multiply(VisioHelper.INCH).toPlainString() + ")");
-      getSingleElement(_VS_GEOM).appendChild(line.copy());
-      // System.out.println(xmlRoot.toXML());
-    } catch (ParsingException e) {
-      throw new VisioGraphException("error parsing: " + LINE_TO_TEMPLATE);
-    } catch (IOException e) {
-      throw new VisioGraphException("error parsing: " + LINE_TO_TEMPLATE);
-    }
+    Document lineToTemplate = XmlHelper.visioBuild(LINE_TO_TEMPLATE);
+    Element line = lineToTemplate.getRootElement();
+    XmlHelper.setValue(line, "/v:LineTo/@IX", String.valueOf(nextLineId));
+    nextLineId++;
+    XmlHelper.setValue(line, "/v:LineTo/v:X", xDelta);
+    XmlHelper.setValue(line, "/v:LineTo/v:Y", yDelta);
+    System.out.print("  -> (" + xDelta.multiply(VisioHelper.INCH).toPlainString() + ", "
+                     + yDelta.multiply(VisioHelper.INCH).toPlainString() + ")");
+    getSingleElement(_VS_GEOM).appendChild(line.copy());
+    // System.out.println(xmlRoot.toXML());
 
   }
 

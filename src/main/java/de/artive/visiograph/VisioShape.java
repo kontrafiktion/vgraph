@@ -19,7 +19,6 @@ package de.artive.visiograph;
 import de.artive.visiograph.helper.XmlHelper;
 import nu.xom.*;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
@@ -42,6 +41,15 @@ public abstract class VisioShape {
   public static final String _VS_WIDTH = _VS_XFORM + "/v:Width";
   public static final String _VS_HEIGHT = _VS_XFORM + "/v:Height";
   public static final String _VS_TEXT = _VS_SHAPE + "/v:Text";
+  public static final String _VS_LAYER_CONTAINER = _VS_SHAPE + "/v:LayerMem";
+  public static final String LAYER_MEMBER_NAME = "LayerMember";
+  public static final String _VS_LAYER_MEMBERS = _VS_LAYER_CONTAINER + "/v:" + LAYER_MEMBER_NAME;
+
+  public static final String LAYER_MEM_XML =
+      "<LayerMem xmlns=\"http://schemas.microsoft.com/visio/2003/core\" />";
+
+  public static final String _LM_LAYER_MEM_VALUE = "./v:" + LAYER_MEMBER_NAME;
+
 
   public static final Element CHAR_INDEX_ELEMENT;
 
@@ -59,15 +67,8 @@ public abstract class VisioShape {
 
   protected VisioShape() {
     Builder builder = new Builder();
-    try {
-      Document document = builder.build(getTemplate(), "");
-      xmlRoot = (Element) document.getRootElement().copy();
-    } catch (ParsingException e) {
-      throw new VisioGraphException("problem parsing: " + getTemplate(), e);
-    } catch (IOException e) {
-      throw new VisioGraphException("we are not doing IO here, why should there be an IO Exception:" + e.getMessage(),
-                                    e);
-    }
+    Document document = XmlHelper.visioBuild(getTemplate());
+    xmlRoot = (Element) document.getRootElement().copy();
   }
 
   protected VisioShape(BigDecimal pinX, BigDecimal pinY, BigDecimal width, BigDecimal height, String extId, String text) {
@@ -199,6 +200,23 @@ public abstract class VisioShape {
     this.xmlRoot = xmlRoot;
   }
 
+
+  public void setLayer(String layerId) {
+
+    // TODO: create once?
+    Element layerContainer = XmlHelper.getSingleElement(xmlRoot, _VS_LAYER_CONTAINER, true);
+    if (layerContainer != null) {
+      layerContainer.removeChildren();
+    } else {
+      layerContainer = XmlHelper.visioBuild(LAYER_MEM_XML).getRootElement();
+      layerContainer = (Element) layerContainer.copy();
+      xmlRoot.appendChild(layerContainer);
+    }
+
+    Element layerMember = new Element(LAYER_MEMBER_NAME, XmlHelper.VISIO_SCHEMA);
+    layerMember.appendChild(layerId);
+    layerContainer.appendChild(layerMember);
+  }
 
   @Override
   public String toString() {

@@ -27,6 +27,11 @@ public class Node extends GraphElement {
     super(extID, text);
   }
 
+  @Override
+  public VisioShape getVisioShape() {
+    return getVisioRectangle();
+  }
+
   public VisioRectangle getVisioRectangle() {
     return visioRectangle;
   }

@@ -39,7 +39,6 @@ public class VisioGraph {
   private static final int ERR_TOO_MANY_ARGUMENTS = 3;
   private static final int ERR_PARSING_EXCEPTION = 4;
 
-  // TODO: package as shell/batch script
   // TODO: color NEW/OBSOLETE elements
   // TODO: TextPosition same row
   // TODO: connections to self
@@ -47,6 +46,7 @@ public class VisioGraph {
   // TODO: strict and lenient parsing
   // TODO: ERROR CODES
 
+  // TODO: Handling of manually rerouted connectors 
   // TODO: shape.height() instead of NODE_HEIGHT
   // TODO: mapping from some node type to shapes
   // TODO: configuration (file) GraphXPathProvider
@@ -56,12 +56,15 @@ public class VisioGraph {
 
   // TODO: BegTrigger/EndTrigger?
 
-  // usage: visiograph [OPTIONS] <source> <target>
-  // -l --loader <loader_name>     the class name of the loader to be used
-  // -c --loaderConf <loader_conf> some configuration string for the loader (e.g. a URL)
-  // -t --template <template_name> the name of a Visio template file
-  // -f --force                    overwrite the target instead of merging
-  //
+  // TODO: Check that new text from a model finds its way to the diagram
+  // TODO: Check that changed layout is preserved
+  // TODO: Check that new Elements are preserved
+  // TODO: check what happens to manually deleted Nodes/Connectors
+  // TODO: Check what happens if a node is deleted, but a connector is left dangling
+  // TODO: Unit Test for Xml Helper
+  // TODO: Unit Test for VisioDocument
+  // TODO: Unit test for VisioShape and VisioRectangle
+
 
   public static Map<String, SourceLoader> KNOWN_LOADERS = new HashMap<String, SourceLoader>() {{
     // put("simple", new SimpleXmlSourceLoader() 
@@ -149,11 +152,15 @@ public class VisioGraph {
 
     Graph existingGraph = visioDocument.getGraph();
 
+    boolean merge = false;
+
     // move the visio shapes from the existing graph to the new graph
     for (Node newNode : newGraph.getNodes()) {
       Node existingNode = existingGraph.getNode(newNode.getExtID());
       if (existingNode != null) {
+        merge = true;
         newNode.setVisioRectangle(existingNode.getVisioRectangle());
+        newNode.getVisioRectangle().setText(newNode.getText());
         existingNode.setVisioRectangle(null);
       }
     }
@@ -162,6 +169,7 @@ public class VisioGraph {
       Edge existingEdge = existingGraph.getEdge(newEdge.getExtID());
       if (existingEdge != null) {
         newEdge.setVisioConnector(existingEdge.getVisioConnector());
+        newEdge.getVisioConnector().setText(newEdge.getText());
         existingEdge.setVisioConnector(null);
       }
     }
@@ -169,37 +177,52 @@ public class VisioGraph {
     // now all nodes/edges in the new graph, that have no visio counterpart are _new_ elements
     // and all nodes/edges in the existing graph that still have visio counterparts are obsolete
 
+    Layout layout = new Layout();
+
+    // TODO: create a getGraphElements method in Graph
+
+    // move all OBSOLETE elements to the Deleted-Layer
     for (Node existingNode : existingGraph.getNodes()) {
-      if (existingNode.getVisioRectangle() != null) {
-        System.out.println("OBSOLETE: " + existingNode);
-      } else {
-        System.out.println("exists: " + existingNode);
+      if (!VisioDocument.VISIOGRAPH_STAMP_EXT_ID.equals(existingNode.getExtID())) {
+        if (existingNode.getVisioRectangle() != null) {
+          System.out.println("OBSOLETE: " + existingNode);
+          layout.markDeleted(visioDocument, existingNode.getVisioShape());
+        } else {
+          System.out.println("exists: " + existingNode);
+        }
       }
     }
+
 
     for (Edge existingEdge : existingGraph.getEdges()) {
       if (existingEdge.getVisioConnector() != null) {
         System.out.println("OBSOLETE: " + existingEdge);
+        layout.markDeleted(visioDocument, existingEdge.getVisioShape());
       } else {
         System.out.println("exists: " + existingEdge);
       }
     }
 
-    for (Node newNode : newGraph.getNodes()) {
-      if (newNode.getVisioRectangle() == null) {
-        System.out.println("NEW: " + newNode);
-      }
-    }
+    layout.layout(visioDocument, newGraph, merge);
 
-    for (Edge newEdge : newGraph.getEdges()) {
-      if (newEdge.getVisioConnector() == null) {
-        System.out.println("NEW: " + newEdge);
-      }
-    }
+//    for (Node newNode : newGraph.getNodes()) {
+//      if (newNode.getVisioRectangle() == null) {
+//        if (merge) {
+//          layout.markNew(visioDocument, newNode.getVisioShape());
+//        }
+//        System.out.println("NEW: " + newNode);
+//      }
+//    }
+//
+//    for (Edge newEdge : newGraph.getEdges()) {
+//      if (newEdge.getVisioConnector() == null) {
+//        if (merge) {
+//          layout.markNew(visioDocument, newEdge.getVisioShape());
+//        }
+//        System.out.println("NEW: " + newEdge);
+//      }
+//    }
 
-
-    Layout layout = new Layout();
-    layout.layout(visioDocument, newGraph);
 
 
     OutputStream outputStream = System.out;

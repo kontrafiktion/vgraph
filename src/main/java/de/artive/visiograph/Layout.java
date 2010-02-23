@@ -16,8 +16,10 @@
 
 package de.artive.visiograph;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import de.artive.visiograph.helper.XmlHelper;
+import nu.xom.Document;
+import nu.xom.Element;
+
 import java.math.*;
 import java.util.*;
 
@@ -42,7 +44,42 @@ public class Layout {
   private static BigDecimal ySpaceHalf;
   private static BigDecimal xSpaceHalf;
 
-  public void layout(VisioDocument visioDocument, Graph graph) {
+
+  public static final String DELETED_LAYER_XML =
+      "<Layer xmlns=\"http://schemas.microsoft.com/visio/2003/core\" IX=\"1\">\n"
+      + "    <Name>Deleted</Name>\n"
+      + "    <Color>2</Color>\n"
+      + "    <Status>0</Status>\n"
+      + "    <Visible>1</Visible>\n"
+      + "    <Print>1</Print>\n"
+      + "    <Active>0</Active>\n"
+      + "    <Lock>0</Lock>\n"
+      + "    <Snap>1</Snap>\n"
+      + "    <Glue>1</Glue>\n"
+      + "    <NameUniv>Deleted</NameUniv>\n"
+      + "    <ColorTrans>0</ColorTrans>\n"
+      + "</Layer>\n";
+  public static final String NEW_LAYER_XML =
+      "<Layer xmlns=\"http://schemas.microsoft.com/visio/2003/core\" IX=\"2\">\n"
+      + "    <Name>New</Name>\n"
+      + "    <Color>9</Color>\n"
+      + "    <Status>0</Status>\n"
+      + "    <Visible>1</Visible>\n"
+      + "    <Print>1</Print>\n"
+      + "    <Active>0</Active>\n"
+      + "    <Lock>0</Lock>\n"
+      + "    <Snap>1</Snap>\n"
+      + "    <Glue>1</Glue>\n"
+      + "    <NameUniv>New</NameUniv>\n"
+      + "    <ColorTrans>0</ColorTrans>\n"
+      + "</Layer>";
+  private static final String LAYER_IX = "IX";
+  private static final String _L_NAME = "./v:Name";
+  private static final String DELETED_LAYER_NAME = "Deleted";
+  private static final String NEW_LAYER_NAME = "New";
+
+
+  public void layout(VisioDocument visioDocument, Graph graph, boolean merge) {
 
     List<Node> nodesToLayout = new ArrayList<Node>(64);
     List<Edge> edgesToLayout = new ArrayList<Edge>(64);
@@ -54,7 +91,7 @@ public class Layout {
       }
     }
 
-    layoutNodes(visioDocument, nodesToLayout);
+    layoutNodes(visioDocument, nodesToLayout, merge);
 
     for (Edge edge : graph.getEdges()) {
       if (edge.getVisioConnector() == null) {
@@ -62,11 +99,11 @@ public class Layout {
       }
     }
 
-    layoutEdges(graph, visioDocument, edgesToLayout);
+    layoutEdges(graph, visioDocument, edgesToLayout, merge);
 
   }
 
-  private void layoutEdges(Graph graph, VisioDocument visioDocument, List<Edge> edgesToLayout) {
+  private void layoutEdges(Graph graph, VisioDocument visioDocument, List<Edge> edgesToLayout, boolean merge) {
     for (Edge edge : edgesToLayout) {
       Node source = edge.getSource();
       Node target = edge.getTarget();
@@ -123,6 +160,12 @@ public class Layout {
                              edge.getText());
 
 
+      if (merge) {
+        markNew(visioDocument, visioConnector);
+      }
+
+      edge.setVisioConnector(visioConnector);
+
       // draw line segments
       // ------------------
       BigDecimal yDelta;
@@ -153,7 +196,7 @@ public class Layout {
   }
 
 
-  private void layoutNodes(VisioDocument visioDocument, List<Node> nodesToLayout) {
+  private void layoutNodes(VisioDocument visioDocument, List<Node> nodesToLayout, boolean merge) {
 
     BigDecimal width = visioDocument.getPageWidth();
     BigDecimal height = visioDocument.getPageHeight();
@@ -167,8 +210,6 @@ public class Layout {
       int x = 0;
       int y = 0;
       int rest = size;
-
-      // TODO: start with high Y and reduce it (0 is in the lower left corner)
 
       BigDecimal columnsBD = new BigDecimal(columns);
       BigDecimal rowsBD = new BigDecimal(rows);
@@ -224,6 +265,10 @@ public class Layout {
         node.setVisioRectangle(visioRectangle);
         visioDocument.addShape(visioRectangle);
 
+        if (merge) {
+          markNew(visioDocument, visioRectangle);
+        }
+
         System.out.print(node.getExtID() + " (" + xPos.toPlainString() + "," + yPos.toPlainString() + ") ");
         rest--;
         x++;
@@ -238,6 +283,24 @@ public class Layout {
       }
 
     }
+
+  }
+
+  public void markDeleted(VisioDocument visioDocument, VisioShape shape) {
+    moveToLayer(visioDocument, shape, DELETED_LAYER_NAME, DELETED_LAYER_XML);
+  }
+
+  private void moveToLayer(VisioDocument visioDocument, VisioShape shape, String layerName, String layerXml) {
+    String layerId = visioDocument.getLayerId(layerName);
+    if (layerId == null) {
+      Document layer = XmlHelper.visioBuild(layerXml);
+      layerId = visioDocument.addLayer((Element) layer.getRootElement().copy());
+    }
+    shape.setLayer(layerId);
+  }
+
+  public void markNew(VisioDocument visioDocument, VisioShape shape) {
+    moveToLayer(visioDocument, shape, NEW_LAYER_NAME, NEW_LAYER_XML);
   }
 
   private static int nodesOnAxis(BigDecimal factor, int size) {
@@ -245,33 +308,5 @@ public class Layout {
     return new BigDecimal(xVal).setScale(0, RoundingMode.CEILING).intValue();
   }
 
-  public static void main(String[] args) throws IOException {
-    Graph graph = new Graph();
-    Node nodeA = new Node("A", "A");
-    Node nodeB = new Node("B", "B");
-    Node nodeC = new Node("C", "C");
-    Node nodeD = new Node("D", "D");
-    Node nodeE = new Node("E", "E");
-    graph.addNode(nodeA);
-    graph.addNode(nodeB);
-    graph.addNode(nodeC);
-    graph.addNode(nodeD);
-    graph.addNode(nodeE);
-
-    graph.addEdge(new Edge("AB", "AB", nodeA, nodeB));
-    // graph.addEdge(new Edge("DB", "DB", nodeD, nodeB));
-    graph.addEdge(new Edge("CE", "CE", nodeC, nodeE));
-
-    VisioDocument vd = new VisioDocument();
-    Layout l = new Layout();
-    l.layout(vd, graph);
-
-
-    FileWriter fw = new FileWriter("layout-main.vdx");
-    fw.write(vd.getDocument().toXML());
-    fw.close();
-
-
-  }
 
 }

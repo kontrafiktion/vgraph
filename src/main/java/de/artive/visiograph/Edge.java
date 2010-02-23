@@ -81,4 +81,8 @@ public class Edge extends GraphElement {
     this.visioConnector = visioConnector;
   }
 
+  @Override
+  public VisioShape getVisioShape() {
+    return getVisioConnector();
+  }
 }

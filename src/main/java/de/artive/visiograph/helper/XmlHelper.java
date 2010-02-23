@@ -19,50 +19,40 @@ package de.artive.visiograph.helper;
 import de.artive.visiograph.VisioGraphException;
 import nu.xom.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
- * FIXME: clean up helper methods
+ * Helper methods for handling the XOM tree of a VisioDocument.
  * <p/>
- * Created by IntelliJ IDEA. User: vivo Date: Feb 14, 2010 Time: 6:03:09 PM To change this template use File | Settings
- * | File Templates.
+ * All path elements in the {@link #VISIO_SCHEMA) should be preficed with the namespace abbreviation "v". I.e.
+ * "/VisioDocument/Pages" should be used as "/v:VisioDocument/v:Pages"
  */
 public class XmlHelper {
   public static final String VISIO_SCHEMA = "http://schemas.microsoft.com/visio/2003/core";
   public static final XPathContext VISIO_XPATH_CONTEXT = new XPathContext("v", VISIO_SCHEMA);
 
 
-  public static String getValue(Element xmlNode, String xPath) {
-    String result = null;
-    if (xPath != null) {
-      Nodes nodes = xmlNode.query(xPath, VISIO_XPATH_CONTEXT);
-      if (nodes.size() > 1) {
-        throw new VisioGraphException("more than one result for XPath: \"" + xPath + "\" in Element: " + xmlNode);
-      }
-      result = nodes.get(0).getValue();
-
-    }
-    return result;
+  /**
+   * Retrieves an Element referenced by the given <code>xPath</code>
+   * <p/>
+   * This method is a simple wrapper around {@link #getSingleElement(nu.xom.Element, String, boolean)} just adding a
+   * <code>false</code> as value for the 'optional' parameter
+   *
+   * @see #getSingleNode(nu.xom.Element, String, boolean)
+   */
+  public static Element getSingleElement(Element element, String xPath) throws VisioGraphException {
+    return getSingleElement(element, xPath, false);
   }
-
 
   /**
-   * Helper method to retrieve an Element referenced by an xPath.
+   * Retrieves an Element referenced by the given <code>xPath</code>
+   * <p/>
+   * This method is a simple wrapper around {@link #getSingleNode(nu.xom.Element, String, boolean)} just eliminating the
+   * cast.
    *
-   * @param xquery
-   * @return
-   * @throws VisioGraphException
+   * @see #getSingleNode(nu.xom.Element, String, boolean)
    */
-  public static Element getSingleElement(Element element, String xquery) throws VisioGraphException {
-    Nodes nodes = element.query(xquery, VISIO_XPATH_CONTEXT);
-    if (nodes.size() > 1) {
-      throw new VisioGraphException("xquery: \"" + xquery + "\" returned more than one Node");
-    } else if (nodes.size() == 0) {
-      throw new VisioGraphException("xquery: \"" + xquery + "\" found no Node");
-    }
-    return (Element) nodes.get(0);
-  }
-
   public static Element getSingleElement(Element element, String xPath, boolean optional) throws VisioGraphException {
     return (Element) getSingleNode(element, xPath, optional);
   }
@@ -78,8 +68,20 @@ public class XmlHelper {
     setValue(element, xPath, value.toString());
   }
 
-  public static Node getSingleNode(Element xmlNode, String xPath, boolean optional) {
-    Nodes nodes = xmlNode.query(xPath, VISIO_XPATH_CONTEXT);
+  /**
+   * Helper method to retrieve a node by the given <code>xPath</code>.
+   * <p/>
+   * The <code>xPath</code> must reference a single Element or Attribute
+   *
+   * @param element  the xml element, which shall be used as root for the search
+   * @param xPath    the XPath that references a single element/attribute
+   * @param optional -- if true, no VisioGraphException is thrown if no referenced node was found
+   * @return the value of the element/attribute
+   * @throws VisioGraphException if more than one referenced node is found.
+   * @throws VisioGraphException if <code>optional</code> is false and no referenced node is found.
+   */
+  public static Node getSingleNode(Element element, String xPath, boolean optional) {
+    Nodes nodes = element.query(xPath, VISIO_XPATH_CONTEXT);
     if (nodes.size() > 1) {
       throw new VisioGraphException("xPath: \"" + xPath + "\" returned more than one Node");
     } else if (nodes.size() == 0) {
@@ -92,38 +94,100 @@ public class XmlHelper {
     return nodes.get(0);
   }
 
-  public static String getValue(Element xmlNode, String xPath, boolean optional) {
-    Node node = getSingleNode(xmlNode, xPath, optional);
+
+  /**
+   * Helper method to retrieve a value by the given <code>xPath</code>.
+   * <p/>
+   * The <code>xPath</code> must reference a single Element or Attribute
+   *
+   * @param element the xml element, which shall be used as root for the search
+   * @param xPath   the XPath that references a single element/attribute
+   * @return the value of the element/attribute
+   * @throws VisioGraphException if no or more than one referenced node is found
+   */
+  public static String getValue(Element element, String xPath) {
+    return getValue(element, xPath, false);
+  }
+
+
+  /**
+   * Helper method to retrieve a value by the given <code>xPath</code>.
+   * <p/>
+   * The <code>xPath</code> must reference a single Element or Attribute
+   *
+   * @param element  the xml element, which shall be used as root for the search
+   * @param xPath    the XPath that references a single element/attribute
+   * @param optional -- if true, no VisioGraphException is thrown if no referenced node was found
+   * @return the value of the element/attribute
+   * @throws VisioGraphException if more than one referenced node is found.
+   * @throws VisioGraphException if <code>optional</code> is false and no referenced node is found.
+   */
+  public static String getValue(Element element, String xPath, boolean optional) {
+    Node node = getSingleNode(element, xPath, optional);
     if (node != null) {
       return node.getValue();
     }
     return null;
   }
 
-  public static void setValue(Element xmlNode, String xPath, BigDecimal value) {
-    setValue(xmlNode, xPath, value.toPlainString());
+  /**
+   * Helper method to change the value of an Element/Attribute in an XML tree
+   * <p/>
+   * The <code>xPath</code> must reference a single Element or Attribute
+   *
+   * @param element the xml element, which shall be used as root for the search
+   * @param xPath   the XPath that references a single element/attribute
+   * @param value   the new value of the referenced node (the BigDecimal is converted to a String using {@link
+   *                java.math.BigDecimal#toPlainString()}
+   */
+  public static void setValue(Element element, String xPath, BigDecimal value) {
+    setValue(element, xPath, value.toPlainString());
   }
 
 
-  public static void setValue(Element xmlNode, String xPath, String value) {
-    Node node = getSingleNode(xmlNode, xPath, false);
+  /**
+   * Helper method to change the value of an Element/Attribute in an XML tree
+   * <p/>
+   * The <code>xPath</code> must reference a single Element or Attribute
+   *
+   * @param element the xml element, which shall be used as root for the search
+   * @param xPath   the XPath that references a single element/attribute
+   * @param value   the new value of the referenced node
+   */
+  public static void setValue(Element element, String xPath, String value) {
+    Node node = getSingleNode(element, xPath, false);
     if (node instanceof Attribute) {
       ((Attribute) node).setValue(value);
     } else if (node instanceof Element) {
-      Element element = (Element) node;
-      element.removeChildren();
-      element.appendChild(value);
+      Element foundElement = (Element) node;
+      foundElement.removeChildren();
+      foundElement.appendChild(value);
     }
 
   }
 
 
-  public static void setAttribute(Element xmlNode, String attrName, String attrValue) {
-    Attribute idAttribute = xmlNode.getAttribute(attrName);
+  public static void setAttribute(Element element, String attrName, String attrValue) {
+    Attribute idAttribute = element.getAttribute(attrName);
     if (idAttribute != null) {
       idAttribute.setValue(attrValue);
     } else {
-      xmlNode.addAttribute(new Attribute(attrName, attrValue));
+      element.addAttribute(new Attribute(attrName, attrValue));
+    }
+  }
+
+
+  public static Document visioBuild(String xmlString) {
+    Builder builder = new Builder();
+    try {
+      Document document = builder.build(xmlString, "");
+      // don't know why this is necessary, but XOM uses the current working directory as default base uri
+      document.setBaseURI("");
+      return document;
+    } catch (ParsingException e) {
+      throw new VisioGraphException("error parsing: " + xmlString, e);
+    } catch (IOException e) {
+      throw new VisioGraphException("error parsing: " + xmlString, e);
     }
   }
 }

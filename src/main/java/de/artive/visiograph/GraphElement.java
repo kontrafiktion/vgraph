@@ -20,7 +20,7 @@ package de.artive.visiograph;
  * Created by IntelliJ IDEA. User: vivo Date: Feb 11, 2010 Time: 1:20:22 PM To change this template use File | Settings
  * | File Templates.
  */
-public class GraphElement {
+public abstract class GraphElement {
   private String extID;
 
   private String text;
@@ -59,6 +59,8 @@ public class GraphElement {
 
     return true;
   }
+
+  public abstract VisioShape getVisioShape();
 
   @Override
   public int hashCode() {

@@ -6,9 +6,24 @@
   </component>
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="b897346d-1210-4d23-b588-41b25bc31f1e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/visio_blank_a4_landscape.vdx" afterPath="$PROJECT_DIR$/src/main/resources/visio_blank_a4_landscape.vdx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Edge.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Edge.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/GraphElement.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/GraphElement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/resources/SimpleGraphNew.xml" afterPath="$PROJECT_DIR$/src/test/resources/SimpleGraphNew.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Node.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Node.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioShape.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioShape.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/visio_blank_a3_landscape.vdx" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/doc/visiograph.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioDocument.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioDocument.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioConnector.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioConnector.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioRectangle.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioRectangle.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/visio_blank_a2_landscape.vdx" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Layout.java" afterPath="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Layout.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/resources/SimpleGraph.xml" afterPath="$PROJECT_DIR$/src/test/resources/SimpleGraph.xml" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +46,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" line="93" class="de.artive.visiograph.VisioGraph" package="de.artive.visiograph">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" line="96" class="de.artive.visiograph.VisioGraph" package="de.artive.visiograph">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -44,20 +59,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java" line="44" class="de.artive.visiograph.helper.XmlHelper" package="de.artive.visiograph.helper">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java" line="70" class="de.artive.visiograph.helper.XmlHelper" package="de.artive.visiograph.helper">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java" line="60" class="de.artive.visiograph.helper.XmlHelper" package="de.artive.visiograph.helper">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -83,7 +85,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" line="146" class="de.artive.visiograph.VisioGraph" package="de.artive.visiograph">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioDocument.java" line="379" class="de.artive.visiograph.VisioDocument" package="de.artive.visiograph">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -96,7 +98,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" line="155" class="de.artive.visiograph.VisioGraph" package="de.artive.visiograph">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java" line="85" class="de.artive.visiograph.helper.XmlHelper" package="de.artive.visiograph.helper">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -109,7 +111,59 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" line="163" class="de.artive.visiograph.VisioGraph" package="de.artive.visiograph">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java" line="88" class="de.artive.visiograph.helper.XmlHelper" package="de.artive.visiograph.helper">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioShape.java" line="206" class="de.artive.visiograph.VisioShape" package="de.artive.visiograph">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Layout.java" line="264" class="de.artive.visiograph.Layout" package="de.artive.visiograph">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" line="218" class="de.artive.visiograph.VisioGraph" package="de.artive.visiograph">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" line="209" class="de.artive.visiograph.VisioGraph" package="de.artive.visiograph">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -167,61 +221,7 @@
       <file leaf-file-name="VisioGraph.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="18" selection-start="1053" selection-end="1053" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="70" selection-start="3867" selection-end="3867" vertical-scroll-proportion="0.9432624">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="license.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/license.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="27" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Edge.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Edge.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="25" selection-start="583" selection-end="583" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NodesIterator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/NodesIterator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="visio.vdx" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/work/visio.vdx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="15" selection-start="407" selection-end="407" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimpleGraphNew.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/resources/SimpleGraphNew.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="52" selection-start="646" selection-end="646" vertical-scroll-proportion="0.0">
+            <state line="224" column="0" selection-start="7051" selection-end="7594" vertical-scroll-proportion="-11.5">
               <folding />
             </state>
           </provider>
@@ -230,7 +230,19 @@
       <file leaf-file-name="Node.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Node.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="24" selection-start="582" selection-end="582" vertical-scroll-proportion="0.0">
+            <state line="38" column="14" selection-start="1114" selection-end="1114" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="method#getVisioRectangle#0;class#Node#0" expanded="true" />
+                <element signature="method#setVisioRectangle#0;class#Node#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Edge.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Edge.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="57" column="22" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -239,16 +251,68 @@
       <file leaf-file-name="GraphElement.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/GraphElement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="18" selection-start="1326" selection-end="1326" vertical-scroll-proportion="0.0">
+            <state line="22" column="16" selection-start="793" selection-end="793" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Graph.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Graph.java">
+      <file leaf-file-name="VisioDocument.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioDocument.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="14" selection-start="1323" selection-end="1338" vertical-scroll-proportion="0.0">
+            <state line="255" column="13" selection-start="10535" selection-end="10535" vertical-scroll-proportion="0.8642534">
+              <folding>
+                <element signature="method#getDocument#0;class#VisioDocument#0" expanded="true" />
+                <element signature="method#getGraph#0;class#VisioDocument#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Document.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/xom/xom/1.1/xom-1.1-sources.jar!/nu/xom/Document.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="210" column="0" selection-start="6092" selection-end="6092" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VisioShape.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioShape.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="203" column="14" selection-start="6375" selection-end="6375" vertical-scroll-proportion="-5.5">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Layout.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Layout.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="163" column="45" selection-start="5877" selection-end="5877" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VisioConnector.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioConnector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="69" selection-start="2380" selection-end="2435" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XmlHelper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="83" column="0" selection-start="3316" selection-end="3316" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -267,22 +331,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioConnector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioRectangle.java" />
-        <option value="$PROJECT_DIR$/firstVisio.vdx" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Dummy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Graph.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/GraphElement.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioShape.java" />
-        <option value="$PROJECT_DIR$/src/test/resources/SimpleGraph.xml" />
-        <option value="$PROJECT_DIR$/src/test/resources/SimpleGraphNew.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioDocument.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/CreateInstance.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/NodesIterator.java" />
         <option value="$PROJECT_DIR$/license.txt" />
-        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioRectangle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioConnector.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/visio_blank_a4_landscape.vdx" />
+        <option value="$PROJECT_DIR$/src/test/resources/SimpleGraphNew.xml" />
+        <option value="$PROJECT_DIR$/src/test/resources/SimpleGraph.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/SimpleXmlSourceLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/GraphElement.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Node.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Edge.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioShape.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/Layout.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioDocument.java" />
       </list>
     </option>
   </component>
@@ -356,6 +420,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -387,32 +452,6 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -451,82 +490,13 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visiograph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visiograph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visiograph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="helper" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -537,7 +507,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="MavenSettings" />
+    <property name="options.lastSelected" value="org.jetbrains.idea.maven.indices.MavenIndicesConfigurable" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -545,23 +515,24 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="de.artive.visiograph.VisioDocument" />
+      <recent name="de.artive.visiograph.Layout" />
+      <recent name="de.artive.visiograph.VisioShape" />
+      <recent name="de.artive.visiograph.helper.XmlHelper" />
+      <recent name="de.artive.visiograph.VisioRectangle" />
+    </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="de.artive.visiograph.helper.XmlHelper" />
       <recent name="de.artive.visiograph.helper.VisioHelper" />
       <recent name="de.artive.visiograph.VisioDocument" />
       <recent name="de.artive.visiograph.helper.Constants" />
       <recent name="de.artive.visiograph.VisioShape" />
-      <recent name="de.artive.visiograph.helper.XmlHelper" />
-    </key>
-    <key name="IntroduceConstantDialog.RECENTS_KEY">
-      <recent name="de.artive.visiograph.VisioShape" />
-      <recent name="de.artive.visiograph.Layout" />
-      <recent name="de.artive.visiograph.helper.XmlHelper" />
-      <recent name="de.artive.visiograph.VisioRectangle" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="de.artive.visiograph.main" />
@@ -975,10 +946,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="873" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32734275" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32862645" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37355584" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -987,14 +959,13 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4749679" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991013" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.14536929" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32997844" sideWeight="0.6469833" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32997844" sideWeight="0.6469833" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39971244" sideWeight="0.6636714" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24946082" sideWeight="0.6469833" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3440308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32862645" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992298" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1010,7 +981,7 @@
     <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="added license information" />
+    <option name="LAST_COMMIT_MESSAGE" value="packaging with one-jar" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1033,6 +1004,7 @@
     <MESSAGE value="- command line handling&#10;- PreviewImage replaced&#10;- xml:base handling for Connect elements" />
     <MESSAGE value="- first time the merge works!" />
     <MESSAGE value="added license information" />
+    <MESSAGE value="packaging with one-jar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1114,6 +1086,27 @@
       <element expression="/x:VisioDocument/x:Pages/x:Page[@ID=&quot;0&quot;]/x:Shapes/x:Shape[not(following-sibling::x:Shape/@ID &gt; @ID) and not(preceding-sibling::x:Shape/@ID &gt; @ID)]">
         <namespace prefix="x" uri="http://schemas.microsoft.com/visio/2003/core" />
       </element>
+      <element expression="/x:VisioDocument/x:Masters">
+        <namespace prefix="x" uri="http://schemas.microsoft.com/visio/2003/core" />
+      </element>
+      <element expression="/x:VisioDocument/x:Masters/x:Master[@ID=&quot;0&quot;]">
+        <namespace prefix="x" uri="http://schemas.microsoft.com/visio/2003/core" />
+      </element>
+      <element expression="/x:VisioDocument/x:Masters/x:Master[@ID=&quot;0&quot;]/x:Layer">
+        <namespace prefix="x" uri="http://schemas.microsoft.com/visio/2003/core" />
+      </element>
+      <element expression="/x:VisioDocument/x:Masters/x:Master[@ID=&quot;0&quot;]/x:PageSheet/x:Layer">
+        <namespace prefix="x" uri="http://schemas.microsoft.com/visio/2003/core" />
+      </element>
+      <element expression="/x:VisioDocument/x:Masters/x:Master[@ID=&quot;0&quot;]/x:PageSheet/x:Layer[not(following-sibling::x:Layout/@ID &gt; @ID) and not(preceding-sibling::x:Layout/@ID &gt; @ID)]/@ID">
+        <namespace prefix="x" uri="http://schemas.microsoft.com/visio/2003/core" />
+      </element>
+      <element expression="/x:VisioDocument/x:Masters/x:Master[@ID=&quot;0&quot;]/x:PageSheet/x:Layer[not(following-sibling::x:Layer/@ID &gt; @ID) and not(preceding-sibling::x:Layer/@ID &gt; @ID)]/@ID">
+        <namespace prefix="x" uri="http://schemas.microsoft.com/visio/2003/core" />
+      </element>
+      <element expression="/x:VisioDocument/x:Masters/x:Master[@ID=&quot;0&quot;]/x:PageSheet/x:Layer[not(following-sibling::x:Layer/@IX &gt; @IX) and not(preceding-sibling::x:Layer/@IX &gt; @IX)]/@IX">
+        <namespace prefix="x" uri="http://schemas.microsoft.com/visio/2003/core" />
+      </element>
     </history>
     <find-history />
   </component>
@@ -1122,115 +1115,123 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Dummy.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioRectangle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="46" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="128" column="51" selection-start="5150" selection-end="5150" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioShape.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Graph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="22" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="50" column="14" selection-start="1323" selection-end="1338" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioConnector.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/visio_blank_a4_landscape.vdx">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="41" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioDocument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="224" column="54" selection-start="8940" selection-end="8940" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/SimpleGraph.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="334" selection-end="588" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/CreateInstance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/NodesIterator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/work/visio.vdx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="15" selection-start="407" selection-end="407" vertical-scroll-proportion="0.0">
+        <state line="0" column="38" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/SimpleGraphNew.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="52" selection-start="646" selection-end="646" vertical-scroll-proportion="0.0">
+        <state line="1" column="0" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Node.java">
+    <entry file="file://$PROJECT_DIR$/src/test/resources/SimpleGraph.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="24" selection-start="582" selection-end="582" vertical-scroll-proportion="0.0">
+        <state line="1" column="0" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/SimpleXmlSourceLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="0" selection-start="1730" selection-end="1730" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/GraphElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="18" selection-start="1326" selection-end="1326" vertical-scroll-proportion="0.0">
+        <state line="22" column="16" selection-start="793" selection-end="793" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Graph.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/xom/xom/1.1/xom-1.1-sources.jar!/nu/xom/Document.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="14" selection-start="1323" selection-end="1338" vertical-scroll-proportion="0.0">
+        <state line="210" column="0" selection-start="6092" selection-end="6092" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/helper/XmlHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="0" selection-start="3316" selection-end="3316" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Edge.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="25" selection-start="583" selection-end="583" vertical-scroll-proportion="0.0">
+        <state line="57" column="22" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/license.txt">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="27" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0">
+        <state line="56" column="69" selection-start="2380" selection-end="2435" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="14" selection-start="1114" selection-end="1114" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#getVisioRectangle#0;class#Node#0" expanded="true" />
+            <element signature="method#setVisioRectangle#0;class#Node#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="18" selection-start="1053" selection-end="1053" vertical-scroll-proportion="0.0">
+        <state line="224" column="0" selection-start="7051" selection-end="7594" vertical-scroll-proportion="-11.5">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioShape.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="70" selection-start="3867" selection-end="3867" vertical-scroll-proportion="0.9432624">
-          <folding />
+        <state line="203" column="14" selection-start="6375" selection-end="6375" vertical-scroll-proportion="-5.5">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/Layout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="163" column="45" selection-start="5877" selection-end="5877" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/artive/visiograph/VisioDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="255" column="13" selection-start="10535" selection-end="10535" vertical-scroll-proportion="0.8642534">
+          <folding>
+            <element signature="method#getDocument#0;class#VisioDocument#0" expanded="true" />
+            <element signature="method#getGraph#0;class#VisioDocument#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
