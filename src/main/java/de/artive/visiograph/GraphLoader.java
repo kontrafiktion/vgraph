@@ -33,60 +33,26 @@
 
 package de.artive.visiograph;
 
-import java.util.*;
-
 /**
- * Created by IntelliJ IDEA. User: vivo Date: Feb 12, 2010 Time: 8:44:13 PM To change this template use File | Settings
- * | File Templates.
+ * A very genric interface. IMplementation must be able to load a {@link de.artive.visiograph.Graph}
  */
-public class Graph {
-
-  private Map<String, Node> nodes = new HashMap<String, Node>();
-  private Map<String, Edge> edges = new HashMap<String, Edge>();
-
-  public void addNode(String extId, String text) {
-    addNode(new Node(extId, text));
-  }
-
-  public void addNode(Node node) {
-    if (node.getExtID() == null) {
-      throw new VisioGraphException("no external ID given: " + node.getText());
-    }
-    checkUniqueExtId(node);
-    nodes.put(node.getExtID(), node);
-  }
-
-  private void checkUniqueExtId(GraphElement graphElement) {
-    if (nodes.containsKey(graphElement.getExtID()) || edges.containsKey(graphElement.getExtID())) {
-      throw new VisioGraphException("Duplicate external ID: " + graphElement.getExtID());
-    }
-  }
-
-  public boolean removeNode(Node node) {
-    return nodes.remove(node.getExtID()) != null;
-  }
-
-  public Node getNode(String extId) {
-    return nodes.get(extId);
-  }
-
-  public Collection<Node> getNodes() {
-    return nodes.values();
-  }
-
-  public Collection<Edge> getEdges() {
-    return edges.values();
-  }
+public interface GraphLoader {
 
 
-  public void addEdge(Edge edge) {
-    checkUniqueExtId(edge);
-    edges.put(edge.getExtID(), edge);
-  }
-
-  public Edge getEdge(String extId) {
-    return edges.get(extId);
-  }
-
-
+  /**
+   * Loads the <code>graph</code> from the given <code>source</code>.
+   * <p/>
+   * How the <code>source</code> and the <code>configuration</code> are interpreted is completely up to the
+   * implementation (see e.g. {@link de.artive.visiograph.SimpleXmlSourceLoader} and {@link
+   * de.artive.visiograph.ConfigurableXMLGraphXPathProvider}).
+   * <p/>
+   * Since 'visiograph' is normally invked by the command line, all configuration must be possible using String
+   *
+   * @param source        the source from which the graph shall be loaded (this might be a file name, a table name in a
+   *                      DB, etc.. The interpetation is up to the implementation
+   * @param configuration an (optional) configuration, again this is completely up to the implementation
+   * @param graph         the graph into which the source shall be loaded
+   * @throws VisioGraphException (see {@link de.artive.visiograph.ErrorCode} for possible errors)
+   */
+  public void load(String source, String configuration, Graph graph) throws VisioGraphException;
 }

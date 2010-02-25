@@ -1,17 +1,34 @@
 /*
- * Copyright 2010 Victor Volle
+ * Copyright (c) 2010, Victor Volle
+ * All rights reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above
+ *       copyright notice, this list of conditions and the following
+ *       disclaimer in the documentation and/or other materials provided
+ *       with the distribution.
+ *     * Neither the name of the visiograph nor the names
+ *       of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written
+ *       permission.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  */
 
 package de.artive.visiograph;
@@ -20,6 +37,8 @@ import de.artive.visiograph.helper.CreateInstance;
 import de.artive.visiograph.helper.XmlHelper;
 import nu.xom.*;
 import nu.xom.Node;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -32,7 +51,9 @@ import static de.artive.visiograph.helper.NodesIterator.nodesIterator;
  * <p/>
  * User: vivo Date: Feb 13, 2010 Time: 7:09:31 PM
  */
-public class SimpleXmlSourceLoader implements SourceLoader {
+public class SimpleXmlSourceLoader implements GraphLoader {
+  Logger logger = LoggerFactory.getLogger(SimpleXmlSourceLoader.class);
+
 
   /**
    *
@@ -41,8 +62,9 @@ public class SimpleXmlSourceLoader implements SourceLoader {
   }
 
 
+
   @Override
-  public void load(String sourceName, Graph graph, String configuration) {
+  public void load(String sourceName, String configuration, Graph graph) {
     GraphXPathProvider graphXPathProvider = null;
     if (configuration != null) {
       graphXPathProvider = CreateInstance.createInstance(configuration);
@@ -57,9 +79,9 @@ public class SimpleXmlSourceLoader implements SourceLoader {
       Document document = new Builder().build(source);
       _load(document, graphXPathProvider, graph);
     } catch (ParsingException e) {
-      throw new VisioGraphException("error parsing: " + source, e);
+      throw new VisioGraphException(ErrorCode.XML_GENERIC_PARSING, "error parsing: " + source, e);
     } catch (IOException e) {
-      throw new VisioGraphException("error parsing: " + source, e);
+      throw new VisioGraphException(ErrorCode.XML_IO, "error parsing: " + source, e);
     }
 
   }
@@ -88,12 +110,17 @@ public class SimpleXmlSourceLoader implements SourceLoader {
             "could not find connect node with ID: " + edgeSourceExtId + " referenced by connection: " + edgeExtId);
       }
       if (targetNode == null) {
-        throw new VisioGraphException(
-            "could not find connect node with ID: " + edgeTargetExtId + " referenced by connection: " + edgeExtId);
+        throw new VisioGraphException(ErrorCode.LOADER_REFERENCED_NODE_NOT_FOUND,
+                                      "could not find connect node with ID: " + edgeTargetExtId
+                                      + " referenced by connection: " + edgeExtId);
       }
       Edge edge = new Edge(edgeExtId, edgeText, sourceNode, targetNode);
 
       graph.addEdge(edge);
+    }
+
+    if (0 == graph.getNodes().size()) {
+      throw new VisioGraphException(ErrorCode.LOADER_EMPTY_GRAPH, "Graph loaded is empty. No nodes found in source.");
     }
   }
 

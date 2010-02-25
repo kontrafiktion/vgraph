@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright 2010 Victor Volle
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<VisioDocument xmlns="http://schemas.microsoft.com/visio/2003/core" key="2F47E7BA343B22A8B812DF0CAC70F5E4EB41387101E36508347B86A7FB388DBB767C423C96D045E1B25D5F24C429F3FED67E883C7B9043D3894073E8006D1A73" start="190" metric="0" DocLangID="1033" buildnum="8223" version="11.0">
+<VisioDocument xmlns="http://schemas.microsoft.com/visio/2003/core"
+               key="2F47E7BA343B22A8B812DF0CAC70F5E4EB41387101E36508347B86A7FB388DBB767C423C96D045E1B25D5F24C429F3FED67E883C7B9043D3894073E8006D1A73"
+               start="190" metric="0" DocLangID="1033" buildnum="8223" version="11.0">
     <DocumentProperties>
         <Creator>Victor Volle</Creator>
         <Template>C:\data\visio\uml\UML 2.0 Diagrams (Visio 2003).vst</Template>
@@ -64,29 +50,52 @@
         <ColorEntry IX="23" RGB="#1A1A1A"/>
     </Colors>
     <FaceNames>
-        <FaceName ID="1" Name="Arial Unicode MS" UnicodeRanges="-1 -369098753 63 0" CharSets="1614742015 -65536" Panos="2 11 6 4 2 2 2 2 2 4" Flags="357"/>
-        <FaceName ID="2" Name="Symbol" UnicodeRanges="0 0 0 0" CharSets="-2147483648 0" Panos="5 5 1 2 1 7 6 2 5 7" Flags="261"/>
-        <FaceName ID="3" Name="Wingdings" UnicodeRanges="0 0 0 0" CharSets="-2147483648 0" Panos="5 0 0 0 0 0 0 0 0 0" Flags="261"/>
-        <FaceName ID="4" Name="Arial" UnicodeRanges="31367 -2147483648 8 0" CharSets="1073742335 -65536" Panos="2 11 6 4 2 2 2 2 2 4" Flags="325"/>
-        <FaceName ID="5" Name="SimSun" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352" Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
-        <FaceName ID="6" Name="PMingLiU" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352" Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
-        <FaceName ID="7" Name="MS PGothic" UnicodeRanges="-1610612033 1757936891 16 0" CharSets="1073873055 -539557888" Panos="2 11 6 0 7 2 5 8 2 4" Flags="421"/>
-        <FaceName ID="8" Name="Dotum" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352" Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
-        <FaceName ID="9" Name="Sylfaen" UnicodeRanges="67110535 0 0 0" CharSets="536871071 0" Panos="1 10 5 2 5 3 6 3 3 3" Flags="325"/>
-        <FaceName ID="10" Name="Estrangelo Edessa" UnicodeRanges="-2147459008 0 128 0" CharSets="0 0" Panos="3 8 6 0 0 0 0 0 0 0" Flags="325"/>
-        <FaceName ID="11" Name="Vrinda" UnicodeRanges="65539 0 0 0" CharSets="1 0" Panos="1 1 6 0 1 1 1 1 1 1" Flags="325"/>
-        <FaceName ID="12" Name="Shruti" UnicodeRanges="262144 0 0 0" CharSets="0 0" Panos="2 0 5 0 0 0 0 0 0 0" Flags="325"/>
-        <FaceName ID="13" Name="Mangal" UnicodeRanges="32768 0 0 0" CharSets="0 0" Panos="0 0 4 0 0 0 0 0 0 0" Flags="325"/>
-        <FaceName ID="14" Name="Tunga" UnicodeRanges="4194304 0 0 0" CharSets="0 0" Panos="0 0 4 0 0 0 0 0 0 0" Flags="325"/>
-        <FaceName ID="15" Name="Sendnya" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352" Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
-        <FaceName ID="16" Name="Raavi" UnicodeRanges="131072 0 0 0" CharSets="0 0" Panos="2 0 5 0 0 0 0 0 0 0" Flags="325"/>
-        <FaceName ID="17" Name="Dhenu" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352" Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
-        <FaceName ID="18" Name="Latha" UnicodeRanges="1048576 0 0 0" CharSets="0 0" Panos="2 0 4 0 0 0 0 0 0 0" Flags="325"/>
-        <FaceName ID="19" Name="Gautami" UnicodeRanges="2097152 0 0 0" CharSets="0 0" Panos="2 0 5 0 0 0 0 0 0 0" Flags="325"/>
-        <FaceName ID="20" Name="Cordia New" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352" Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
-        <FaceName ID="21" Name="MS Farsi" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352" Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
-        <FaceName ID="22" Name="Gulim" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352" Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
-        <FaceName ID="23" Name="Times New Roman" UnicodeRanges="31367 -2147483648 8 0" CharSets="1073742335 -65536" Panos="2 2 6 3 5 4 5 2 3 4" Flags="325"/>
+        <FaceName ID="1" Name="Arial Unicode MS" UnicodeRanges="-1 -369098753 63 0" CharSets="1614742015 -65536"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="357"/>
+        <FaceName ID="2" Name="Symbol" UnicodeRanges="0 0 0 0" CharSets="-2147483648 0" Panos="5 5 1 2 1 7 6 2 5 7"
+                  Flags="261"/>
+        <FaceName ID="3" Name="Wingdings" UnicodeRanges="0 0 0 0" CharSets="-2147483648 0" Panos="5 0 0 0 0 0 0 0 0 0"
+                  Flags="261"/>
+        <FaceName ID="4" Name="Arial" UnicodeRanges="31367 -2147483648 8 0" CharSets="1073742335 -65536"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="325"/>
+        <FaceName ID="5" Name="SimSun" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
+        <FaceName ID="6" Name="PMingLiU" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
+        <FaceName ID="7" Name="MS PGothic" UnicodeRanges="-1610612033 1757936891 16 0" CharSets="1073873055 -539557888"
+                  Panos="2 11 6 0 7 2 5 8 2 4" Flags="421"/>
+        <FaceName ID="8" Name="Dotum" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
+        <FaceName ID="9" Name="Sylfaen" UnicodeRanges="67110535 0 0 0" CharSets="536871071 0"
+                  Panos="1 10 5 2 5 3 6 3 3 3" Flags="325"/>
+        <FaceName ID="10" Name="Estrangelo Edessa" UnicodeRanges="-2147459008 0 128 0" CharSets="0 0"
+                  Panos="3 8 6 0 0 0 0 0 0 0" Flags="325"/>
+        <FaceName ID="11" Name="Vrinda" UnicodeRanges="65539 0 0 0" CharSets="1 0" Panos="1 1 6 0 1 1 1 1 1 1"
+                  Flags="325"/>
+        <FaceName ID="12" Name="Shruti" UnicodeRanges="262144 0 0 0" CharSets="0 0" Panos="2 0 5 0 0 0 0 0 0 0"
+                  Flags="325"/>
+        <FaceName ID="13" Name="Mangal" UnicodeRanges="32768 0 0 0" CharSets="0 0" Panos="0 0 4 0 0 0 0 0 0 0"
+                  Flags="325"/>
+        <FaceName ID="14" Name="Tunga" UnicodeRanges="4194304 0 0 0" CharSets="0 0" Panos="0 0 4 0 0 0 0 0 0 0"
+                  Flags="325"/>
+        <FaceName ID="15" Name="Sendnya" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
+        <FaceName ID="16" Name="Raavi" UnicodeRanges="131072 0 0 0" CharSets="0 0" Panos="2 0 5 0 0 0 0 0 0 0"
+                  Flags="325"/>
+        <FaceName ID="17" Name="Dhenu" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
+        <FaceName ID="18" Name="Latha" UnicodeRanges="1048576 0 0 0" CharSets="0 0" Panos="2 0 4 0 0 0 0 0 0 0"
+                  Flags="325"/>
+        <FaceName ID="19" Name="Gautami" UnicodeRanges="2097152 0 0 0" CharSets="0 0" Panos="2 0 5 0 0 0 0 0 0 0"
+                  Flags="325"/>
+        <FaceName ID="20" Name="Cordia New" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
+        <FaceName ID="21" Name="MS Farsi" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
+        <FaceName ID="22" Name="Gulim" UnicodeRanges="1627421663 -2147483648 8 0" CharSets="536936959 539492352"
+                  Panos="2 11 6 4 2 2 2 2 2 4" Flags="327"/>
+        <FaceName ID="23" Name="Times New Roman" UnicodeRanges="31367 -2147483648 8 0" CharSets="1073742335 -65536"
+                  Panos="2 2 6 3 5 4 5 2 3 4" Flags="325"/>
     </FaceNames>
     <StyleSheets>
         <StyleSheet ID="0" NameU="No Style" Name="No Style">
@@ -794,7 +803,10 @@
         </DocProps>
     </DocumentSheet>
     <Masters>
-        <Master ID="0" NameU="Dynamic connector" Name="Dynamic connector" Prompt="This connector automatically routes between the shapes it connects." IconSize="1" AlignName="2" MatchByName="1" IconUpdate="0" UniqueID="{002A9108-0000-0000-8E40-00608CF305B2}" BaseID="{F7290A45-E3AD-11D2-AE4F-006008C9F5A9}" PatternFlags="0" Hidden="0">
+        <Master ID="0" NameU="Dynamic connector" Name="Dynamic connector"
+                Prompt="This connector automatically routes between the shapes it connects." IconSize="1" AlignName="2"
+                MatchByName="1" IconUpdate="0" UniqueID="{002A9108-0000-0000-8E40-00608CF305B2}"
+                BaseID="{F7290A45-E3AD-11D2-AE4F-006008C9F5A9}" PatternFlags="0" Hidden="0">
             <PageSheet LineStyle="0" FillStyle="0" TextStyle="0">
                 <PageProps>
                     <PageWidth>3.937007874015748</PageWidth>
@@ -875,7 +887,7 @@
                     </Protection>
                     <Help>
                         <HelpTopic>Vis_SE.chm!#20000</HelpTopic>
-                        <Copyright>Copyright 2001 Microsoft Corporation.  All rights reserved.</Copyright>
+                        <Copyright>Copyright 2001 Microsoft Corporation. All rights reserved.</Copyright>
                     </Help>
                     <Misc>
                         <NoObjHandles F="Inh">0</NoObjHandles>
@@ -980,20 +992,21 @@
                 </Shape>
             </Shapes>
             <Icon>
-AAABAAEAICAQfAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAgAIAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAgICAAMDAwAAAAP8AAP8AAAD//wD/AAAA/w
-D/AP//AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAeHh4eAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAAAAAADNzMzAIAAAAAAAAAAAAAAAAAAAwBw
-AAAAAAAAAAAAAw///wMAgAAAAAAAAAAAAHgP//8IeHh4eHh4eHAAAACAD/n/AwCAAAAAAACAAAAAc
-ACZkAAAcAAAAAAAcAAAAIAACTAAAIAAAAAAAIAAAABwAAAAAABwAAAAAABwAAAAgAAAMAAAgAAAAA
-AAgAAAAHAAADMzM3MzMzMAAHAAAACAAAAAAAAAAAADAACAAAAAcAAAAAAAcAAAAwAAcAAAAIAAAAA
-AAIAAAAMAAIAAAABwAAAAAABwAAADAABwAAAAgAAAAAAAgAAAAwAAgAAAAHAAAAAAAHAAM5MzMHAA
-AACAAAAAAACAAAmZADCAAAAAcAAAAAAAcAD/n/AwcAAAAIeHh4eHh4eA///wh4AAAAAAAAAAAABwA
-P//8DAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAHAAAHAAAAAAAAAAAAAAAACAAACAAAAAAAAAAA
-AAAAAAeHh4cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
-9/eAAPf3gAD39/989/f/fPf3/3z39/989/f/cBf3/2AX9/9gF/AAAAf//2Af//9gP///ff///33//
-/8B/////////////////w==</Icon>
+                AAABAAEAICAQfAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAgAIAAAAAAAAAAAAAAAAAA
+                AAAAAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAgICAAMDAwAAAAP8AAP8AAAD//wD/AAAA/w
+                D/AP//AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                AAAAAAAeHh4eAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAAAAAADNzMzAIAAAAAAAAAAAAAAAAAAAwBw
+                AAAAAAAAAAAAAw///wMAgAAAAAAAAAAAAHgP//8IeHh4eHh4eHAAAACAD/n/AwCAAAAAAACAAAAAc
+                ACZkAAAcAAAAAAAcAAAAIAACTAAAIAAAAAAAIAAAABwAAAAAABwAAAAAABwAAAAgAAAMAAAgAAAAA
+                AAgAAAAHAAADMzM3MzMzMAAHAAAACAAAAAAAAAAAADAACAAAAAcAAAAAAAcAAAAwAAcAAAAIAAAAA
+                AAIAAAAMAAIAAAABwAAAAAABwAAADAABwAAAAgAAAAAAAgAAAAwAAgAAAAHAAAAAAAHAAM5MzMHAA
+                AACAAAAAAACAAAmZADCAAAAAcAAAAAAAcAD/n/AwcAAAAIeHh4eHh4eA///wh4AAAAAAAAAAAABwA
+                P//8DAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAHAAAHAAAAAAAAAAAAAAAACAAACAAAAAAAAAAA
+                AAAAAAeHh4cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
+                9/eAAPf3gAD39/989/f/fPf3/3z39/989/f/cBf3/2AX9/9gF/AAAAf//2Af//9gP///ff///33//
+                /8B/////////////////w==
+            </Icon>
         </Master>
     </Masters>
     <Pages>
@@ -1222,7 +1235,7 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
                         </LineTo>
                     </Geom>
                     <Text><cp IX="0"/>Avolle
-</Text>
+                    </Text>
                 </Shape>
                 <Shape ID="2" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
                     <XForm>
@@ -1346,7 +1359,7 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
                         </LineTo>
                     </Geom>
                     <Text><cp IX="0"/>Bvolle
-</Text>
+                    </Text>
                 </Shape>
                 <Shape ID="3" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
                     <XForm>
@@ -1447,7 +1460,7 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
                         </LineTo>
                     </Geom>
                     <Text><cp IX="0"/>abvolle
-</Text>
+                    </Text>
                 </Shape>
                 <Shape ID="4" NameU="Dynamic connector" Type="Shape" Master="0">
                     <XForm>
@@ -1577,7 +1590,7 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
                         </LineTo>
                     </Geom>
                     <Text><cp IX="0"/>ba
-</Text>
+                    </Text>
                 </Shape>
                 <Shape ID="5" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
                     <XForm>
@@ -1704,7 +1717,7 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
                         </LineTo>
                     </Geom>
                     <Text><cp IX="0"/>Cvolle
-</Text>
+                    </Text>
                 </Shape>
                 <Shape ID="6" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
                     <XForm>
@@ -1831,7 +1844,7 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
                         </LineTo>
                     </Geom>
                     <Text><cp IX="0"/>Dvolle
-</Text>
+                    </Text>
                 </Shape>
                 <Shape ID="7" Type="Shape" LineStyle="3" FillStyle="3" TextStyle="3">
                     <XForm>
@@ -1935,7 +1948,7 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
                         </LineTo>
                     </Geom>
                     <Text><cp IX="0"/>cdvolle
-</Text>
+                    </Text>
                 </Shape>
                 <Shape ID="8" NameU="Dynamic connector.8" Type="Shape" Master="0">
                     <XForm>
@@ -2065,7 +2078,7 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
                         </LineTo>
                     </Geom>
                     <Text><cp IX="0"/>dcvolle
-</Text>
+                    </Text>
                 </Shape>
             </Shapes>
             <Connects>
@@ -2081,7 +2094,9 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
         </Page>
     </Pages>
     <Windows ClientWidth="1398" ClientHeight="771">
-        <Window ID="0" WindowType="Drawing" WindowState="268435456" WindowLeft="0" WindowTop="0" WindowWidth="1398" WindowHeight="771" ContainerType="Page" Page="0" ViewScale="1" ViewCenterX="6.0885416666667" ViewCenterY="4.1041666666667">
+        <Window ID="0" WindowType="Drawing" WindowState="268435456" WindowLeft="0" WindowTop="0" WindowWidth="1398"
+                WindowHeight="771" ContainerType="Page" Page="0" ViewScale="1" ViewCenterX="6.0885416666667"
+                ViewCenterY="4.1041666666667">
             <ShowRulers>1</ShowRulers>
             <ShowGrid>1</ShowGrid>
             <ShowPageBreaks>0</ShowPageBreaks>
@@ -2093,8 +2108,10 @@ AAAD/////////////////gH///79///4Df//8A3//+AN///AAAAf0A3/39Ad/9/eff/f3H3/3959/
             <DynamicGridEnabled>0</DynamicGridEnabled>
             <TabSplitterPos>0.5</TabSplitterPos>
         </Window>
-        <Window ID="1" WindowType="Stencil" WindowState="4" WindowLeft="1122" WindowTop="1" WindowWidth="76" WindowHeight="731" Document="C:\data\visio\uml\UML 2.0 Icons and Stereotypes.vss" ParentWindow="0"/>
-        <Window ID="2" WindowType="Stencil" WindowState="67109889" WindowLeft="-186" WindowTop="1" WindowWidth="180" WindowHeight="731" Document="C:\data\visio\uml\UML 2.0 Symbols (Visio2003).vss" ParentWindow="0">
+        <Window ID="1" WindowType="Stencil" WindowState="4" WindowLeft="1122" WindowTop="1" WindowWidth="76"
+                WindowHeight="731" Document="C:\data\visio\uml\UML 2.0 Icons and Stereotypes.vss" ParentWindow="0"/>
+        <Window ID="2" WindowType="Stencil" WindowState="67109889" WindowLeft="-186" WindowTop="1" WindowWidth="180"
+                WindowHeight="731" Document="C:\data\visio\uml\UML 2.0 Symbols (Visio2003).vss" ParentWindow="0">
             <StencilGroup>10</StencilGroup>
             <StencilGroupPos>0</StencilGroupPos>
         </Window>

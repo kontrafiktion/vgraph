@@ -1,17 +1,34 @@
 /*
- * Copyright 2010 Victor Volle
+ * Copyright (c) 2010, Victor Volle
+ * All rights reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above
+ *       copyright notice, this list of conditions and the following
+ *       disclaimer in the documentation and/or other materials provided
+ *       with the distribution.
+ *     * Neither the name of the visiograph nor the names
+ *       of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written
+ *       permission.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  */
 
 package de.artive.visiograph;
@@ -54,8 +71,8 @@ public class VisioDocument {
   // TODO: check for single Page?
   // private static final String _MASTER_PAGE_SHEET = "/v:VisioDocument/v:Masters/v:Master[@ID=\"0\"]/v:PageSheet";
   public static final String _LAYER = _PAGE_SHEET + "/v:Layer";
-  public static final String _MAX_LAYER_ID = _LAYER + "[not(following-sibling::v:Layer/@IX > @IX) and not(preceding-sibling::v:Layer/@IX > @IX)]/@IX";
-
+  public static final String _MAX_LAYER_ID =
+      _LAYER + "[not(following-sibling::v:Layer/@IX > @IX) and not(preceding-sibling::v:Layer/@IX > @IX)]/@IX";
 
 
   public static final String CONNECT_TEMPLATE_BEGIN =
@@ -257,52 +274,6 @@ public class VisioDocument {
   }
 
 
-  private static abstract class ResourceHandler<T extends Closeable> {
-    String resourceName;
-
-    protected ResourceHandler(String resourceName) {
-      this.resourceName = resourceName;
-    }
-
-    protected T open() throws IOException {
-      throw new IOException("'open' not implemented");
-    }
-
-    protected abstract void doWithCloseable(T resource) throws Exception;
-
-    public void execute() throws IOException {
-      T resource = open();
-      execute(resource);
-    }
-
-    public void execute(T resource) throws IOException {
-      if (resource != null) {
-        IOException exception = null;
-        try {
-          doWithCloseable(resource);
-        } catch (Exception e) {
-          exception = new IOException("problem loadeing: " + resourceName, e);
-        } finally {
-          try {
-            resource.close();
-          } catch (IOException e) {
-            if (exception == null) {
-              exception = new IOException("colud not close: " + resourceName, e);
-            } else {
-              e.printStackTrace();
-            }
-            throw exception;
-          }
-        }
-      } else {
-        throw new FileNotFoundException("could not open resource: " + resourceName);
-      }
-
-    }
-
-
-  }
-
   public void addShape(VisioShape visioShape) {
     Element newXmlNode = visioShape.getShapeElement();
 
@@ -370,7 +341,7 @@ public class VisioDocument {
    * Searches for a layer with the given <code>layerName</code> and returns its Index (IX-Attribute).
    *
    * @param layerName
-   * @return the IX of the layer or null, if the layer could not be found 
+   * @return the IX of the layer or null, if the layer could not be found
    */
   public String getLayerId(String layerName) {
     return XmlHelper.getValue(document.getRootElement(), _LAYER + "[v:Name='" + layerName + "']/@IX", true);
@@ -380,7 +351,7 @@ public class VisioDocument {
     String maxLayerId = getValue(document.getRootElement(), _MAX_LAYER_ID, true);
 
     int nextLayerId = 0;
-    if ( maxLayerId != null) {
+    if (maxLayerId != null) {
       nextLayerId = Integer.valueOf(maxLayerId) + 1;
     }
     layer.getAttribute("IX").setValue(String.valueOf(nextLayerId));

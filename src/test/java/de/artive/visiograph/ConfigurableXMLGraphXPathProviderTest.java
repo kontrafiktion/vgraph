@@ -33,59 +33,43 @@
 
 package de.artive.visiograph;
 
-import java.util.*;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.io.IOException;
+
 
 /**
- * Created by IntelliJ IDEA. User: vivo Date: Feb 12, 2010 Time: 8:44:13 PM To change this template use File | Settings
+ * Created by IntelliJ IDEA. User: vivo Date: Feb 24, 2010 Time: 9:41:05 PM To change this template use File | Settings
  * | File Templates.
  */
-public class Graph {
+public class ConfigurableXMLGraphXPathProviderTest {
 
-  private Map<String, Node> nodes = new HashMap<String, Node>();
-  private Map<String, Edge> edges = new HashMap<String, Edge>();
+  @Test(expectedExceptions = IOException.class)
+  public void testMissingMandatory() throws IOException {
 
-  public void addNode(String extId, String text) {
-    addNode(new Node(extId, text));
+    ConfigurableXMLGraphXPathProvider xpathProvider = new ConfigurableXMLGraphXPathProvider(
+        "ConfigurableXMLGraphXPathProvider/missingNodeExtId.properties");
   }
 
-  public void addNode(Node node) {
-    if (node.getExtID() == null) {
-      throw new VisioGraphException("no external ID given: " + node.getText());
-    }
-    checkUniqueExtId(node);
-    nodes.put(node.getExtID(), node);
-  }
+  @Test
+  public void testSimpleGraph() throws IOException {
 
-  private void checkUniqueExtId(GraphElement graphElement) {
-    if (nodes.containsKey(graphElement.getExtID()) || edges.containsKey(graphElement.getExtID())) {
-      throw new VisioGraphException("Duplicate external ID: " + graphElement.getExtID());
-    }
-  }
+    ConfigurableXMLGraphXPathProvider xpathProvider = new ConfigurableXMLGraphXPathProvider(
+        "SimpleXMLGraph.properties");
 
-  public boolean removeNode(Node node) {
-    return nodes.remove(node.getExtID()) != null;
-  }
+    Assert.assertEquals("/graph/systems/system", xpathProvider.getNodesPath());
+    Assert.assertEquals("/graph/connections/connect", xpathProvider.getEdgesPath());
+    Assert.assertEquals("@id", xpathProvider.getNodeExtIdPath());
+    Assert.assertEquals("@id", xpathProvider.getEdgeExtIdPath());
+    Assert.assertEquals(".", xpathProvider.getNodeTextPath());
+    Assert.assertEquals(".", xpathProvider.getEdgeTextPath());
+    Assert.assertEquals("@source", xpathProvider.getEdgeSourceExtIdPath());
+    Assert.assertEquals("@target", xpathProvider.getEdgeTargetExtIdPath());
+    Assert.assertEquals("@target", xpathProvider.getEdgeTargetExtIdPath());
+    Assert.assertNull(xpathProvider.getNodeKindPath());
+    Assert.assertNull(xpathProvider.getEdgeKindPath());
 
-  public Node getNode(String extId) {
-    return nodes.get(extId);
-  }
-
-  public Collection<Node> getNodes() {
-    return nodes.values();
-  }
-
-  public Collection<Edge> getEdges() {
-    return edges.values();
-  }
-
-
-  public void addEdge(Edge edge) {
-    checkUniqueExtId(edge);
-    edges.put(edge.getExtID(), edge);
-  }
-
-  public Edge getEdge(String extId) {
-    return edges.get(extId);
   }
 
 

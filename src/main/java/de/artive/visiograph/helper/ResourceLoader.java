@@ -31,62 +31,51 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.artive.visiograph;
+package de.artive.visiograph.helper;
 
-import java.util.*;
+import de.artive.visiograph.VisioDocument;
+
+import java.io.*;
 
 /**
- * Created by IntelliJ IDEA. User: vivo Date: Feb 12, 2010 Time: 8:44:13 PM To change this template use File | Settings
+ * Created by IntelliJ IDEA. User: vivo Date: Feb 24, 2010 Time: 8:04:42 PM To change this template use File | Settings
  * | File Templates.
  */
-public class Graph {
+public abstract class ResourceLoader {
 
-  private Map<String, Node> nodes = new HashMap<String, Node>();
-  private Map<String, Edge> edges = new HashMap<String, Edge>();
+  protected abstract void slurp(Reader resource) throws IOException;
 
-  public void addNode(String extId, String text) {
-    addNode(new Node(extId, text));
-  }
+  public void load(String resourceName) throws IOException {
+    final File templateFile = new File(resourceName);
 
-  public void addNode(Node node) {
-    if (node.getExtID() == null) {
-      throw new VisioGraphException("no external ID given: " + node.getText());
+    if (templateFile.exists()) {
+      (new ResourceHandler<Reader>(templateFile.getPath()) {
+
+        @Override
+        protected Reader open() throws IOException {
+          return new FileReader(templateFile);
+        }
+
+        @Override
+        protected void doWithCloseable(Reader resource) throws Exception {
+          slurp(resource);
+        }
+
+      }).execute();
+
+    } else {
+      final InputStream stream = VisioDocument.class.getClassLoader().getResourceAsStream(resourceName);
+      if (stream != null) {
+        (new ResourceHandler<InputStream>(templateFile.getPath()) {
+
+          @Override
+          protected void doWithCloseable(InputStream stream) throws Exception {
+            slurp(new InputStreamReader(stream));
+          }
+
+        }).execute(stream);
+      }
     }
-    checkUniqueExtId(node);
-    nodes.put(node.getExtID(), node);
   }
-
-  private void checkUniqueExtId(GraphElement graphElement) {
-    if (nodes.containsKey(graphElement.getExtID()) || edges.containsKey(graphElement.getExtID())) {
-      throw new VisioGraphException("Duplicate external ID: " + graphElement.getExtID());
-    }
-  }
-
-  public boolean removeNode(Node node) {
-    return nodes.remove(node.getExtID()) != null;
-  }
-
-  public Node getNode(String extId) {
-    return nodes.get(extId);
-  }
-
-  public Collection<Node> getNodes() {
-    return nodes.values();
-  }
-
-  public Collection<Edge> getEdges() {
-    return edges.values();
-  }
-
-
-  public void addEdge(Edge edge) {
-    checkUniqueExtId(edge);
-    edges.put(edge.getExtID(), edge);
-  }
-
-  public Edge getEdge(String extId) {
-    return edges.get(extId);
-  }
-
 
 }

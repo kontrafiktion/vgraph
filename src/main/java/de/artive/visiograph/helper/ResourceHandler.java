@@ -31,61 +31,57 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.artive.visiograph;
+package de.artive.visiograph.helper;
 
-import java.util.*;
+import java.io.*;
 
 /**
- * Created by IntelliJ IDEA. User: vivo Date: Feb 12, 2010 Time: 8:44:13 PM To change this template use File | Settings
+ * Created by IntelliJ IDEA. User: vivo Date: Feb 24, 2010 Time: 8:00:15 PM To change this template use File | Settings
  * | File Templates.
  */
-public class Graph {
+public abstract class ResourceHandler<T extends Closeable> {
+  String resourceName;
 
-  private Map<String, Node> nodes = new HashMap<String, Node>();
-  private Map<String, Edge> edges = new HashMap<String, Edge>();
-
-  public void addNode(String extId, String text) {
-    addNode(new Node(extId, text));
+  protected ResourceHandler(String resourceName) {
+    this.resourceName = resourceName;
   }
 
-  public void addNode(Node node) {
-    if (node.getExtID() == null) {
-      throw new VisioGraphException("no external ID given: " + node.getText());
+  protected T open() throws IOException {
+    throw new IOException("'open' not implemented");
+  }
+
+  protected abstract void doWithCloseable(T resource) throws Exception;
+
+  public void execute() throws IOException {
+    T resource = open();
+    execute(resource);
+  }
+
+  public void execute(T resource) throws IOException {
+    if (resource != null) {
+      IOException exception = null;
+      try {
+        doWithCloseable(resource);
+      } catch (Exception e) {
+        exception = new IOException("problem loading: " + resourceName, e);
+      } finally {
+        try {
+          resource.close();
+        } catch (IOException e) {
+          if (exception == null) {
+            exception = new IOException("colud not close: " + resourceName, e);
+          } else {
+            e.printStackTrace();
+          }
+        }
+        if (exception != null) {
+          throw exception;
+        }
+      }
+    } else {
+      throw new FileNotFoundException("could not open resource: " + resourceName);
     }
-    checkUniqueExtId(node);
-    nodes.put(node.getExtID(), node);
-  }
 
-  private void checkUniqueExtId(GraphElement graphElement) {
-    if (nodes.containsKey(graphElement.getExtID()) || edges.containsKey(graphElement.getExtID())) {
-      throw new VisioGraphException("Duplicate external ID: " + graphElement.getExtID());
-    }
-  }
-
-  public boolean removeNode(Node node) {
-    return nodes.remove(node.getExtID()) != null;
-  }
-
-  public Node getNode(String extId) {
-    return nodes.get(extId);
-  }
-
-  public Collection<Node> getNodes() {
-    return nodes.values();
-  }
-
-  public Collection<Edge> getEdges() {
-    return edges.values();
-  }
-
-
-  public void addEdge(Edge edge) {
-    checkUniqueExtId(edge);
-    edges.put(edge.getExtID(), edge);
-  }
-
-  public Edge getEdge(String extId) {
-    return edges.get(extId);
   }
 
 

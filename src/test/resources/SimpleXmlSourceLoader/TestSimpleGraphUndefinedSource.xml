@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+
+<graph>
+    <systems>
+        <system id="A">Node A</system>
+        <system id="B">Node B</system>
+        <system id="C">Node C</system>
+        <system id="D">Node D</system>
+        <system id="E">Node E</system>
+    </systems>
+    <connections>
+        <connect id="cAA" target="F">A=>F</connect>
+        <connect id="cAB" source="A" target="B">A=>A</connect>
+        <connect id="cCD" source="C" target="D">C=>D</connect>
+        <connect id="cDC" source="D" target="C">D=>C</connect>
+    </connections>
+</graph>
