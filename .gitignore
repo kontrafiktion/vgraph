@@ -3,9 +3,7 @@
 target/
 *~
 .settings/
-/layout-main*.vdx
-/firstVisio*.vdx
 .idea/
 Dummy.*
-*.vdx
+/*.vdx
 

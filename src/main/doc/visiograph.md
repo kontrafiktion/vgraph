@@ -30,7 +30,7 @@ If you simply execute
 
 on the command line you should get a helpful description like this:
 
-    Usage: java -jar vgraph.jar [OPTIONS] <source> <target>
+    Usage: java -jar vgraph-one-jar.jar [OPTIONS] <source> <target>
     OPTIONS: 
      -c (--conf) <configuration string> : a configuration for the source loader 
                                           (depends on the loader implementation)
@@ -76,7 +76,7 @@ If the properties are in a file called 'myXPath.properties' and your model is in
 
     java -jar vgraph-one-jar.jar -c myXPath.properties myModel.xml visio.vdx
 
-If the simple XPath extraction mechanism does not suffice, you can even write your own loader, which only have to implement a very simple Java interface:
+If the simple XPath extraction mechanism does not suffice, you can even write your own loader, which only has to implement a very simple Java interface:
 
     public interface GraphLoader {
       public void load(String source, String configuration, Graph graph);
