@@ -7,3 +7,5 @@ target/
 /firstVisio*.vdx
 .idea/
 Dummy.*
+*.vdx
+

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<graph>
+    <systems>
+        <system id="A">Node A</system>
+        <system id="B">Node B</system>
+        <system id="C">Node C</system>
+        <system id="D">Node D</system>
+    </systems>
+    <connections>
+        <connect id="cAB" source="B" target="C"/>
+    </connections>
+</graph>

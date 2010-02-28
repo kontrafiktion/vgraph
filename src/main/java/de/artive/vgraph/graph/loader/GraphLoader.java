@@ -15,7 +15,7 @@ import de.artive.vgraph.VGraphException;
 import de.artive.vgraph.graph.Graph;
 
 /**
- * A very genric interface. IMplementation must be able to load a {@link de.artive.vgraph.graph.Graph}
+ * A very genric interface. Implementation must be able to load a {@link de.artive.vgraph.graph.Graph}
  */
 public interface GraphLoader {
 
@@ -27,7 +27,7 @@ public interface GraphLoader {
    * implementation (see e.g. {@link SimpleXmlSourceLoader} and {@link
    * ConfigurableXMLGraphXPathProvider}).
    * <p/>
-   * Since 'vgraph' is normally invked by the command line, all configuration must be possible using String
+   * Since 'vgraph' is normally invoked by the command line, all configuration must be possible using String
    *
    * @param source        the source from which the graph shall be loaded (this might be a file name, a table name in a
    *                      DB, etc.. The interpetation is up to the implementation
