@@ -2,7 +2,8 @@
 /*.project
 target/
 *~
-.settings/org.eclipse.jdt.core.prefs
+.settings/
 /layout-main*.vdx
 /firstVisio*.vdx
 .idea/
+Dummy.*

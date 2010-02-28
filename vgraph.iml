@@ -12,15 +12,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/plugins/testng/lib/testng-jdk15.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" exported="" name="Maven: xom:xom:1.1" level="project" />
     <orderEntry type="library" exported="" name="Maven: xerces:xmlParserAPIs:2.6.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: xerces:xercesImpl:2.6.2" level="project" />

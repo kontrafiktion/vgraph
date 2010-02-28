@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.artive</groupId>
-    <artifactId>visiograph</artifactId>
+    <artifactId>vgraph</artifactId>
     <packaging>jar</packaging>
     <version>0.1-SNAPSHOT</version>
-    <name>VisioGraph</name>
+    <name>vgraph</name>
 
     <properties>
         <slf4j.version>1.5.6</slf4j.version>
@@ -22,9 +22,9 @@
     </pluginRepositories>
 
     <scm>
-        <connection>scm:git:git://github.com/vrvolle/VisioGraph.git</connection>
-        <url>http://github.com/vrvolle/VisioGraph</url>
-        <developerConnection>scm:git:git:git@github.com:vrvolle/VisioGraph.git</developerConnection>
+        <connection>scm:git:git://github.com/vrvolle/vgraph.git</connection>
+        <url>http://github.com/vrvolle/vgraph</url>
+        <developerConnection>scm:git:git:git@github.com:vrvolle/vgraph.git</developerConnection>
     </scm>
 
 
@@ -93,7 +93,7 @@
                 <executions>
                     <execution>
                         <configuration>
-                            <mainClass>de.artive.visiograph.VisioGraph</mainClass>
+                            <mainClass>de.artive.visiograph.VGraph</mainClass>
                         </configuration>
                         <goals>
                             <goal>one-jar</goal>
