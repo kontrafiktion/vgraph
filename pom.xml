@@ -93,7 +93,7 @@
                 <executions>
                     <execution>
                         <configuration>
-                            <mainClass>de.artive.visiograph.VGraph</mainClass>
+                            <mainClass>de.artive.vgraph.main.VGraph</mainClass>
                         </configuration>
                         <goals>
                             <goal>one-jar</goal>
