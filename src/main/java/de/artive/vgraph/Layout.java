@@ -12,10 +12,13 @@
 package de.artive.vgraph;
 
 import de.artive.vgraph.graph.*;
+import de.artive.vgraph.helper.VisioHelper;
 import de.artive.vgraph.helper.XmlHelper;
 import de.artive.vgraph.visio.*;
 import nu.xom.Document;
 import nu.xom.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.*;
 import java.util.*;
@@ -27,6 +30,8 @@ import static de.artive.vgraph.helper.VisioHelper.*;
  * | File Templates.
  */
 public class Layout {
+
+  public static final Logger logger = LoggerFactory.getLogger(Layout.class);
 
   // All sizes in Millimeter
   public static BigDecimal ONE_BORDER = new BigDecimal("20");
@@ -133,17 +138,19 @@ public class Layout {
       BigDecimal endY;
       BigDecimal height;
 
-      if (ySign != 0) { // different rows
+      boolean sameRow = (ySign == 0);
+
+      if (sameRow) {
+        beginY = sourcePinY.add(NODE_HEIGHT_HALF);
+        endY = beginY;
+        height = VISIO_MINIMAL_SIZE;
+      } else {
         BigDecimal yDirectionMultiplier = new BigDecimal(ySign);
 
         beginY = sourcePinY.add(NODE_HEIGHT_HALF.multiply(yDirectionMultiplier));
         endY = targetPinY.add(NODE_HEIGHT_HALF.multiply(yDirectionMultiplier.negate()));
 
         height = targetPinY.subtract(sourcePinY);
-      } else { // same row
-        beginY = sourcePinY.add(NODE_HEIGHT_HALF);
-        endY = beginY;
-        height = VISIO_MINIMAL_SIZE;
       }
       BigDecimal widthHalf = divideByTwo(width);
       BigDecimal heightHalf = divideByTwo(height);
@@ -167,33 +174,48 @@ public class Layout {
       // ------------------
       BigDecimal yDelta;
       BigDecimal yEnd;
-      if (ySign != 0) { // different rows
-        yDelta = heightHalf;
-        yEnd = endY.subtract(beginY);
-      } else { // same rows
+      if (sameRow) { // different rows
         yDelta = ySpaceHalf;
         yEnd = VISIO_Y_DIST_MM;
+      } else { // same rows
+        yDelta = heightHalf;
+        yEnd = endY.subtract(beginY);
       }
 
-      System.out.print(edge.getText() + " (" + beginX + ", " + beginY + ")");
+      logger.debug(edge.getText() + " (" + beginX + ", " + beginY + ")");
       visioConnector.addLine(ZERO,
                              mm2Inch(yDelta));
       visioConnector.addLine(mm2Inch(width),
                              mm2Inch(yDelta));
       visioConnector.addLine(mm2Inch(width),
                              mm2Inch(yEnd));
-      System.out.println();
-
       visioDocument.addShape(visioConnector);
       visioDocument.addConnect(visioConnector.getVisioID(),
                                source.getVisioRectangle().getVisioID(),
                                target.getVisioRectangle().getVisioID());
+
+
+      BigDecimal textX = divideByTwo(width);
+      BigDecimal textY;
+      // TextPos
+      if (sameRow) {
+        textY = yDelta;
+      } else {
+        textY = divideByTwo(height);
+      }
+      visioConnector.setTextPos(mm2Inch(textX), mm2Inch(textY));
+
 
     }
   }
 
 
   private void layoutNodes(VisioDocument visioDocument, List<Node> nodesToLayout, boolean merge) {
+
+    StringBuilder debug = null;
+    if (logger.isDebugEnabled()) {
+      debug = new StringBuilder(128);
+    }
 
     BigDecimal width = visioDocument.getPageWidth();
     BigDecimal height = visioDocument.getPageHeight();
@@ -219,7 +241,9 @@ public class Layout {
       BigDecimal xPos;
       BigDecimal yPos = null;
 
-      System.out.println("xSpace: " + xSpace.toPlainString() + " ySpace: " + ySpace.toPlainString());
+      if (logger.isDebugEnabled()) {
+        logger.debug("xSpace: " + xSpace.toPlainString() + " ySpace: " + ySpace.toPlainString());
+      }
 
       Collections.sort(nodesToLayout, new Comparator<Node>() {
         @Override
@@ -266,7 +290,14 @@ public class Layout {
           markNew(visioDocument, visioRectangle);
         }
 
-        System.out.print(node.getExtID() + " (" + xPos.toPlainString() + "," + yPos.toPlainString() + ") ");
+        if (debug != null) {
+          debug.append(node.getExtID())
+              .append(" (")
+              .append(xPos.toPlainString())
+              .append(",")
+              .append(yPos.toPlainString())
+              .append(") ");
+        }
         rest--;
         x++;
 
@@ -274,7 +305,9 @@ public class Layout {
         if (x >= columns) {
           x = 0;
           y++;
-          System.out.println();
+          if (logger.isDebugEnabled()) {
+            logger.debug(debug.toString());
+          }
           yPos = yPos.subtract(NODE_HEIGHT).subtract(ySpace);
         }
       }
