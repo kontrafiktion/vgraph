@@ -5,7 +5,7 @@ LaTeX XSLT: article
 Base Header Level: 2
 
 Introduction
-============
+------------
 
 [visiograph-create-merge]: visiograph-create-merge.png "Workflow"
 
@@ -20,7 +20,7 @@ _vgraph_ creates a Visio document with a very simplistic layout: it just distrib
 3. Now the model has changed (a connection from A to B is added and node D has been removed). _vgraph_ is used to merge these changes into the Visio diagram. All manual changes are kept, only new nodes and connections are added and deleted elements are marked.
 
 Using _vgraph_
-==============
+--------------
 
 _vgraph_ is a simple command line utility which only needs a Java (TM) runtime environment.
 
@@ -41,7 +41,7 @@ on the command line you should get a helpful description like this:
      -v (--version)                     : display the version
 
 So you have at least to set the 'source' and the 'target', where the source is your model and the
-target ist the name of the Visio document you want to create or merge into. But you must tell _vgraph_ how to load your model. Currently only models in XML are supported and you must provide some XPath expressions that allow _vgrah_ to extract the necessary information. Let's look at a simple example:
+target is the name of the Visio document you want to create or merge into. But you must tell _vgraph_ how to load your model. Currently only models in XML are supported and you must provide some XPath expressions that allow _vgraph_ to extract the necessary information. Let's look at a simple example:
 
     <graph>
         <systems>
@@ -86,8 +86,12 @@ where the 'source' may be a file name (or a database table, or a URL, etc.) and 
 
 [^multi-run]: If you cannot extract all graph elements with a single XPath expression or if you have multiple source models, you can simply run _vgraph_ multiple times and merge everything.
 
+Views
+-----
+Sometimes you have a very big model, but your Visio document shall only display some of its elements. If you cannot export the exact subset of your model, you want to display, you can use Visio's layer mechanism to achieve the desired result: Simply generate the Visio document with _vgraph_ and assign all elements you do not want to display on its own layer. Then make the layer invisible and you are done. Whenever you merge changes from your model into the existing Visio document, only the changes appear (since _vgraph_ still detects the presence of all elements you have put on that "hidden" layer). Of course, there will again be elements you do not want to see, so you have to put them on the hidden layer again, which becomes cumbersome. But in many cases, this should be sufficient. _vgraph_ does not aim to be the perfect visualizing solution, just a simple tool for (hopefully) 80% of the cases.
+
 Internals
-=========
+---------
 
 Internally _vgraph_ simply loads the source model into a Graph object. It then loads the content of the Visio document into another Graph object and compares these two. Any graph element from the model that is not already in the Visio-'graph' is added. _vgraph_ then looks for any Visio shape that has a custom property named 'external_id', but whose value could not be found in the source model. These shapes will then be put on a Visio layer called "Deleted" (if the layer does not exist, it will be created). All elements on this layer are coloured red, so they should be rather visible. If you have coloured some elements red yourself, you could just make all layers besides the "Deleted" layer invisible.
 
