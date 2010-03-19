@@ -11,8 +11,7 @@
 
 package de.artive.vgraph.helper;
 
-import de.artive.vgraph.ErrorCode;
-import de.artive.vgraph.VGraphException;
+import de.artive.vgraph.*;
 import nu.xom.*;
 
 import java.io.IOException;
@@ -80,10 +79,10 @@ public class XmlHelper {
   public static Node getSingleNode(Element element, String xPath, boolean optional) {
     Nodes nodes = element.query(xPath, VISIO_XPATH_CONTEXT);
     if (nodes.size() > 1) {
-      throw new VGraphException("xPath: \"" + xPath + "\" returned more than one Node");
+      throw new XmlTooManyNodesException("xPath: \"" + xPath + "\" returned more than one Node");
     } else if (nodes.size() == 0) {
       if (!optional) {
-        throw new VGraphException(ErrorCode.XML_NODE_NOT_FOUND, "xPath: \"" + xPath + "\" found no Node");
+        throw new XmlNodeNotFoundException("xPath: \"" + xPath + "\" found no Node");
       } else {
         return null;
       }

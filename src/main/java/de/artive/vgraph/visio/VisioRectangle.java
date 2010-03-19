@@ -108,38 +108,6 @@ public class VisioRectangle extends VisioShape {
       "</Text>\n" +
       "</Shape>";
 
-  public static final String DELETED_RECTANGLE_LINE =
-      "<Line>\n"
-      + "    <LineWeight>0.01</LineWeight>\n"
-      + "    <LineColor>0</LineColor>\n"
-      + "    <LinePattern>1</LinePattern>\n"
-      + "    <Rounding F=\"Inh\">0</Rounding>\n"
-      + "    <EndArrowSize F=\"Inh\">2</EndArrowSize>\n"
-      + "    <BeginArrow F=\"Inh\">0</BeginArrow>\n"
-      + "    <EndArrow F=\"Inh\">0</EndArrow>\n"
-      + "    <LineCap F=\"Inh\">0</LineCap>\n"
-      + "    <BeginArrowSize F=\"Inh\">2</BeginArrowSize>\n"
-      + "    <LineColorTrans F=\"Inh\">0</LineColorTrans>\n"
-      + "</Line>\n";
-  public static final String DELETED_RECTANGLE_FILL =
-      "<Fill>\n"
-      + "    <FillForegnd>2</FillForegnd>\n"
-      + "    <FillBkgnd>1</FillBkgnd>\n"
-      + "    <FillPattern>2</FillPattern>\n"
-      + "    <ShdwForegnd F=\"Inh\">0</ShdwForegnd>\n"
-      + "    <ShdwBkgnd F=\"Inh\">1</ShdwBkgnd>\n"
-      + "    <ShdwPattern F=\"Inh\">0</ShdwPattern>\n"
-      + "    <FillForegndTrans F=\"Inh\">0</FillForegndTrans>\n"
-      + "    <FillBkgndTrans F=\"Inh\">0</FillBkgndTrans>\n"
-      + "    <ShdwForegndTrans F=\"Inh\">0</ShdwForegndTrans>\n"
-      + "    <ShdwBkgndTrans F=\"Inh\">0</ShdwBkgndTrans>\n"
-      + "    <ShapeShdwType F=\"Inh\">0</ShapeShdwType>\n"
-      + "    <ShapeShdwOffsetX F=\"Inh\">0</ShapeShdwOffsetX>\n"
-      + "    <ShapeShdwOffsetY F=\"Inh\">0</ShapeShdwOffsetY>\n"
-      + "    <ShapeShdwObliqueAngle F=\"Inh\">0</ShapeShdwObliqueAngle>\n"
-      + "    <ShapeShdwScaleFactor F=\"Inh\">1</ShapeShdwScaleFactor>\n"
-      + "</Fill>";
-
 
   public VisioRectangle(Element xmlRoot) {
     super(xmlRoot);

@@ -38,4 +38,8 @@ public final class VisioHelper {
     return value.divide(INCH, MathContext.DECIMAL32);
   }
 
+  public static final BigDecimal abs(BigDecimal value) {
+    return value.abs(MathContext.DECIMAL32);
+  }
+
 }

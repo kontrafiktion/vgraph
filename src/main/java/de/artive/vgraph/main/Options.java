@@ -43,6 +43,9 @@ public class Options {
   @Option(name = "-v", aliases = {"--version"}, usage = "display the version")
   private boolean version;
 
+  @Option(name = "-n", aliases = {"--non-strict"}, usage = "continue even if some errors occur")
+  private boolean lenient;
+  
   @Argument
   private List<String> argument;
 
@@ -102,5 +105,11 @@ public class Options {
     this.argument = argument;
   }
 
+  public boolean isLenient() {
+    return lenient;
+  }
 
+  public void setLenient(boolean lenient) {
+    this.lenient = lenient;
+  }
 }

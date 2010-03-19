@@ -44,6 +44,13 @@ public class VisioConnector extends VisioShape {
   public static final String _VS_XFORM1D_ENDX = _VS_XFORM1D + "/v:EndX";
   public static final String _VS_XFORM1D_ENDY = _VS_XFORM1D + "/v:EndY";
   public static final String _VS_HEIGHT_FORMULA = _VS_HEIGHT + "/@F";
+  public static final String _VS_TEXT_FORM = _VS_SHAPE + "/v:TextXForm";
+  public static final String _VS_TEXT_PINX = _VS_SHAPE + "/v:TextXForm";
+  public static final String _VS_TEXT_PINY = _VS_SHAPE + "/v:TextXForm";
+  public static final String _VS_TEXT_WIDTH = _VS_SHAPE + "/v:TextXForm";
+  public static final String _VS_TEXT_HEIGHT = _VS_SHAPE + "/v:TextXForm";
+  public static final String _VS_TEXT_LOCPINX = _VS_SHAPE + "/v:TextXForm";
+  public static final String _VS_TEXT_LOCPINY = _VS_SHAPE + "/v:TextXForm";
 
   public static final String HEIGHT_FORMULA_SAME_HEIGHT = "GUARD(0.25DL)";
   public static final String HEIGHT_FORMULA_DIFFERENT_HEIGHT = "GUARD(EndY-BeginY)";
@@ -242,17 +249,6 @@ public class VisioConnector extends VisioShape {
 
     setText(text);
 
-    // TextPos
-    BigDecimal halfWidth = divideByTwo(width);
-    BigDecimal halfHeight = divideByTwo(height);
-    setValue(_VS_TEXTPOS_X, halfWidth);
-    setValue(_VS_TEXTPOS_Y, halfHeight);
-    setValue(_VS_TEXTPOS_XDYN, halfWidth);
-    setValue(_VS_TEXTPOS_YDYN, halfHeight);
-
-
-    // super(pinX, pinY, width, height, extId, text);
-
   }
 
 
@@ -268,6 +264,13 @@ public class VisioConnector extends VisioShape {
     getSingleElement(_VS_GEOM).appendChild(line.copy());
     // System.out.println(xmlRoot.toXML());
 
+  }
+
+  public void setTextPos(BigDecimal x, BigDecimal y) {
+    setValue(_VS_TEXTPOS_X, x);
+    setValue(_VS_TEXTPOS_Y, y);
+    setValue(_VS_TEXTPOS_XDYN, x);
+    setValue(_VS_TEXTPOS_YDYN, y);
   }
 
 

@@ -13,14 +13,16 @@ package de.artive.vgraph.main;
 
 import de.artive.vgraph.Layout;
 import de.artive.vgraph.VGraphException;
-import de.artive.vgraph.graph.*;
+import de.artive.vgraph.graph.Edge;
+import de.artive.vgraph.graph.Graph;
 import de.artive.vgraph.graph.loader.GraphLoader;
 import de.artive.vgraph.graph.loader.SimpleXmlSourceLoader;
-import de.artive.vgraph.main.Options;
 import de.artive.vgraph.visio.VisioDocument;
 import nu.xom.*;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
@@ -32,6 +34,10 @@ import static de.artive.vgraph.helper.CreateInstance.createInstance;
  * | File Templates.
  */
 public class VGraph {
+
+  public static Logger logger = LoggerFactory.getLogger(VGraph.class);
+
+  private static boolean strictParsing = true;
 
   private static final String VERSION = "0.1";
 
@@ -101,7 +107,8 @@ public class VGraph {
     merge(source, null, null, target, null, false);
   }
 
-  public static void merge(Graph source, File target) throws IOException, ParsingException {
+
+  private static void dummy(Graph source, File target) throws IOException, ParsingException {
     if (target.exists()) {
       Builder builder = new Builder();
       Document document = builder.build(target);
@@ -181,10 +188,10 @@ public class VGraph {
     for (de.artive.vgraph.graph.Node existingNode : existingGraph.getNodes()) {
       if (!VisioDocument.VGRAPH_STAMP_EXT_ID.equals(existingNode.getExtID())) {
         if (existingNode.getVisioRectangle() != null) {
-          System.out.println("OBSOLETE: " + existingNode);
+          logger.debug("removed: {}", existingNode);
           layout.markDeleted(visioDocument, existingNode.getVisioShape());
         } else {
-          System.out.println("exists: " + existingNode);
+          logger.debug("exists: {}", existingNode);
         }
       }
     }
@@ -192,32 +199,14 @@ public class VGraph {
 
     for (Edge existingEdge : existingGraph.getEdges()) {
       if (existingEdge.getVisioConnector() != null) {
-        System.out.println("OBSOLETE: " + existingEdge);
+        logger.debug("removed: {}", existingEdge);
         layout.markDeleted(visioDocument, existingEdge.getVisioShape());
       } else {
-        System.out.println("exists: " + existingEdge);
+        logger.debug("exists: {}", existingEdge);
       }
     }
 
     layout.layout(visioDocument, newGraph, merge);
-
-//    for (Node newNode : newGraph.getNodes()) {
-//      if (newNode.getVisioRectangle() == null) {
-//        if (merge) {
-//          layout.markNew(visioDocument, newNode.getVisioShape());
-//        }
-//        System.out.println("NEW: " + newNode);
-//      }
-//    }
-//
-//    for (Edge newEdge : newGraph.getEdges()) {
-//      if (newEdge.getVisioConnector() == null) {
-//        if (merge) {
-//          layout.markNew(visioDocument, newEdge.getVisioShape());
-//        }
-//        System.out.println("NEW: " + newEdge);
-//      }
-//    }
 
 
     OutputStream outputStream = System.out;
@@ -238,7 +227,7 @@ public class VGraph {
   public static void main(String... args) throws IOException, ParsingException {
 
     // args = new String[]{"source"};
-    // args = new String[]{"src/test/resources/SimpleGraph.xml", "firstVisio.vdx"};
+    args = new String[]{"src/test/resources/SimpleGraph.xml", "firstVisio.vdx"};
     // args = new String[]{"-x"};
     // args = new String[]{"-h"};
 
@@ -254,7 +243,7 @@ public class VGraph {
     try {
       cmdLineParser.parseArgument(args);
     } catch (CmdLineException e) {
-      System.err.println();
+
       System.err.println(e.getMessage());
       options.setHelp(true);
       exitCode = ERR_PARSING_EXCEPTION;
@@ -263,6 +252,10 @@ public class VGraph {
     if (options.isVersion()) {
       System.out.println("VGraph (C) 2010 Victor Volle. Version: " + VERSION);
       System.exit(0);
+    }
+
+    if (options.isLenient()) {
+      strictParsing = false;
     }
 
     List<String> nonOptionArguments = options.getArgument();
@@ -299,6 +292,7 @@ public class VGraph {
       out.println("\nUsage: java -jar vgraph.jar [OPTIONS] <source> <target>");
       out.println("OPTIONS: ");
       cmdLineParser.printUsage(out);
+      out.println("  -Dlog4j.configuration=log4j-debug.xml : switch on verbosity");
       System.exit(exitCode);
     }
 
@@ -312,26 +306,12 @@ public class VGraph {
                      options.getTemplate(),
                      options.isForce());
 
-    // VGraph.merge("src/test/resources/SimpleGraph.xml", null, null, "firstVisio.vdx", null, true);
-
-    // load source, create sourceModel
-
-    // check if target exists
-    // NO:
-    // for each Node create a GraphElement in Visio, each distributed evenly on the page
-    //   + map source model "kind" to GraphElement template (either in a master or a file containing placeholders)
-    // for each Edge create a GraphElement in Visio connected to the Node GraphElement
-    //   + map source model "kind" to GraphElement template (either in a master or a file containing placeholders)
-
-
-    // YES
-    // find all missing Nodes and edges in target (Add), find all missing nodes and edges in source (Delete)
-    // for each added node, see NO above (but on the "New" layer)
-    // for each node to be deleted, put it on the "Delete" layer
-    // for each edge, check that the connected nodes are correct, if not log error
-
 
   }
 
+  public static boolean isStrictParsing() {
+    return strictParsing;
+  }
 
+               
 }

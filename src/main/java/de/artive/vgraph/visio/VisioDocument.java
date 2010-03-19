@@ -96,6 +96,7 @@ public class VisioDocument {
 
     initDocument(templateName);
 
+    // FIXME: add debug info
     graph = new Graph();
     Element root = document.getRootElement();
     Nodes allShapes = root.query(_SHAPES, XmlHelper.VISIO_XPATH_CONTEXT);
